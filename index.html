@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="description" content="Landing.team בונה מיני-אתרים מהירים לעסקים קטנים. דף אחד שמביא פניות, וואטסאפ ושיחות." />
   <title>Landing.team | מיני־אתר לעסק קטן</title>
 
@@ -22,9 +22,14 @@
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:20px;
       --max:1120px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
     }
 
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: "Heebo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
@@ -36,20 +41,27 @@
     }
 
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: calc(18px + var(--safe-top)) calc(18px + var(--safe-left)) calc(22px + var(--safe-bottom)) calc(18px + var(--safe-right));
+    }
+
+    /* NAV */
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      gap:16px; padding:14px 16px;
+      gap:12px; padding:12px 12px;
       border:1px solid var(--line);
       background: rgba(15,23,42,.55);
       backdrop-filter: blur(10px);
       border-radius: 16px;
-      position: sticky; top: 14px; z-index: 50;
+      position: sticky; top: calc(12px + var(--safe-top)); z-index: 50;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.2px;
+      min-width: fit-content;
     }
     .logo{
       width:36px; height:36px; border-radius:12px;
@@ -58,28 +70,40 @@
       display:grid; place-items:center;
       font-weight:900; color:#0b0f19;
     }
-    .navlinks{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+
+    .navlinks{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      justify-content:center;
+    }
     .navlinks a{
       color:var(--muted);
       padding:8px 10px;
       border-radius: 10px;
       transition: .2s;
+      font-weight:800;
+      white-space:nowrap;
     }
     .navlinks a:hover{color:var(--text); background: rgba(148,163,184,.10)}
-    .ctaRow{display:flex; gap:10px; align-items:center}
+
+    .ctaRow{display:flex; gap:10px; align-items:center; min-width: fit-content}
+
     .btn{
       border:1px solid var(--line);
       background: rgba(15,23,42,.7);
       color:var(--text);
-      padding:10px 14px;
+      padding:12px 14px;
       border-radius: 12px;
-      font-weight:700;
+      font-weight:900;
       cursor:pointer;
       transition:.2s;
-      display:inline-flex; align-items:center; gap:10px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
       white-space:nowrap;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn:hover{transform: translateY(-1px); border-color: rgba(245,158,11,.35)}
+    .btn:active{transform: translateY(0px);}
+
     .btnPrimary{
       background: linear-gradient(135deg, rgba(245,158,11,.95), rgba(245,158,11,.72));
       color:#0b0f19;
@@ -94,11 +118,35 @@
       box-shadow: 0 16px 40px rgba(34,197,94,.18);
     }
 
+    .menuBtn{
+      display:none;
+      width:44px; height:44px;
+      border-radius: 14px;
+      padding:0;
+    }
+    .menuIcon{
+      width:18px; height:18px;
+      position: relative;
+    }
+    .menuIcon span{
+      position:absolute; left:0; right:0;
+      height:2px; border-radius: 999px;
+      background: rgba(226,232,240,.92);
+      transition:.2s;
+    }
+    .menuIcon span:nth-child(1){top:2px}
+    .menuIcon span:nth-child(2){top:8px}
+    .menuIcon span:nth-child(3){top:14px}
+    .menuOpen .menuIcon span:nth-child(1){top:8px; transform: rotate(45deg)}
+    .menuOpen .menuIcon span:nth-child(2){opacity:0}
+    .menuOpen .menuIcon span:nth-child(3){top:8px; transform: rotate(-45deg)}
+
+    /* HERO */
     .hero{
-      padding:48px 0 20px;
+      padding:34px 0 18px;
       display:grid;
       grid-template-columns: 1.15fr .85fr;
-      gap:22px;
+      gap:18px;
       align-items: start;
     }
     .pill{
@@ -109,7 +157,7 @@
       border:1px solid var(--line);
       background: rgba(15,23,42,.55);
       color: var(--muted);
-      font-weight:700;
+      font-weight:900;
       width: fit-content;
     }
     .h1{
@@ -119,27 +167,38 @@
       letter-spacing: -.3px;
     }
     .lead{
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       color: var(--muted);
       font-size: 18px;
-      line-height: 1.55;
-      max-width: 55ch;
+      line-height: 1.6;
+      max-width: 58ch;
     }
     .high{
       color: var(--text);
-      font-weight:800;
+      font-weight:900;
       background: linear-gradient(90deg, rgba(245,158,11,.35), rgba(34,197,94,.25));
       padding: 0 8px;
       border-radius: 10px;
     }
+    .miniRow{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 14px;
+    }
+    .miniRow .btn{min-height:46px}
+    .miniNote{
+      color:var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
     .bullets{
       display:grid; gap:10px;
       margin-top: 14px;
     }
     .bullet{
       display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px;
-      border-radius: 14px;
+      padding:12px 12px;
+      border-radius: 16px;
       border:1px solid var(--line);
       background: rgba(15,23,42,.55);
     }
@@ -151,6 +210,8 @@
       flex: 0 0 auto;
       margin-top:2px;
     }
+
+    /* CARD + FORM */
     .card{
       border:1px solid var(--line);
       background: rgba(15,23,42,.6);
@@ -164,51 +225,40 @@
     .cardHeader h3{
       margin:0 0 6px;
       font-size:18px;
+      letter-spacing:-.1px;
     }
-    .cardHeader p{margin:0 0 12px; color:var(--muted)}
+    .cardHeader p{margin:0 0 12px; color:var(--muted); line-height:1.5}
+
     .form{
       padding: 0 16px 16px;
       display:grid;
-      gap:10px;
+      gap:12px;
     }
-    .field{
-      display:grid;
-      gap:6px;
-    }
-    label{color:var(--muted); font-weight:700; font-size:14px}
+    .field{display:grid; gap:6px}
+    label{color:var(--muted); font-weight:900; font-size:14px}
     input, textarea, select{
       width:100%;
-      padding:12px 12px;
-      border-radius: 12px;
+      padding:14px 12px;
+      border-radius: 14px;
       border:1px solid var(--line);
       background: rgba(2,6,23,.55);
       color: var(--text);
       outline:none;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 16px; /* חשוב במובייל כדי למנוע zoom באייפון */
     }
     input:focus, textarea:focus, select:focus{
       border-color: rgba(245,158,11,.55);
       box-shadow: 0 0 0 4px rgba(245,158,11,.12);
     }
-    textarea{min-height: 96px; resize: vertical}
+    textarea{min-height: 104px; resize: vertical}
 
-    .miniRow{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-top: 14px;
-    }
-    .miniNote{
-      color:var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .section{
-      padding: 18px 0;
-    }
+    /* SECTIONS */
+    .section{padding: 18px 0}
     .sectionTitle{
       font-size: 20px;
       margin: 0 0 10px;
+      letter-spacing:-.1px;
     }
     .grid3{
       display:grid;
@@ -222,7 +272,8 @@
       background: rgba(15,23,42,.55);
     }
     .feature h4{margin:10px 0 6px}
-    .feature p{margin:0; color:var(--muted); line-height:1.55}
+    .feature p{margin:0; color:var(--muted); line-height:1.6}
+
     .badge{
       display:inline-flex; gap:8px; align-items:center;
       padding:6px 10px;
@@ -230,11 +281,12 @@
       background: rgba(34,197,94,.14);
       border:1px solid rgba(34,197,94,.35);
       color: #b7f7cf;
-      font-weight:800;
+      font-weight:900;
       width: fit-content;
       font-size: 12px;
     }
 
+    /* PRICING */
     .pricing{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -251,13 +303,11 @@
       font-size: 34px;
       font-weight:900;
       margin: 10px 0 6px;
+      letter-spacing:-.2px;
     }
-    .sub{color:var(--muted); margin:0 0 12px}
-    .list{margin: 12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
-    .list li{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--text);
-    }
+    .sub{color:var(--muted); margin:0 0 12px; line-height:1.5}
+    .list{margin: 12px 0 0; padding:0; list-style:none; display:grid; gap:9px}
+    .list li{display:flex; gap:10px; align-items:flex-start; color: var(--text); line-height:1.45}
     .tick{
       width:18px; height:18px; border-radius: 6px;
       background: rgba(34,197,94,.18);
@@ -265,9 +315,9 @@
       flex:0 0 auto;
       margin-top:2px;
     }
-    .faq{
-      display:grid; gap:10px;
-    }
+
+    /* FAQ */
+    .faq{display:grid; gap:10px}
     details{
       border:1px solid var(--line);
       background: rgba(15,23,42,.55);
@@ -279,8 +329,9 @@
       font-weight:900;
       color: var(--text);
     }
-    details p{color:var(--muted); margin:10px 0 0; line-height:1.6}
+    details p{color:var(--muted); margin:10px 0 0; line-height:1.65}
 
+    /* FOOTER */
     .footer{
       padding: 22px 0 36px;
       color: var(--muted);
@@ -291,9 +342,40 @@
       display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
     }
 
+    /* MOBILE */
+    @media (max-width: 960px){
+      .nav{top: calc(10px + var(--safe-top))}
+      .navlinks{display:none}
+      .menuBtn{display:inline-flex}
+      .ctaRow{display:none} /* במובייל הכפתורים עוברים למטה */
+      .hero{grid-template-columns: 1fr; padding-top: 18px}
+      .grid3{grid-template-columns: 1fr}
+      .pricing{grid-template-columns: 1fr}
+      .miniRow .btn{flex:1}
+    }
+
+    /* Mobile menu panel */
+    .mobileMenu{
+      display:none;
+      margin-top: 10px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.68);
+      border-radius: 16px;
+      padding: 10px;
+    }
+    .mobileMenu a{
+      display:block;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: var(--text);
+      font-weight:900;
+    }
+    .mobileMenu a:hover{background: rgba(148,163,184,.10)}
+    .mobileMenu .miniRow{margin-top:10px}
+
     .toast{
       position: fixed;
-      bottom: 16px;
+      bottom: calc(16px + var(--safe-bottom));
       inset-inline: 16px;
       max-width: 520px;
       margin: 0 auto;
@@ -307,34 +389,47 @@
       backdrop-filter: blur(10px);
       z-index: 100;
     }
-
-    @media (max-width: 960px){
-      .hero{grid-template-columns: 1fr; padding-top: 26px}
-      .grid3{grid-template-columns: 1fr}
-      .pricing{grid-template-columns: 1fr}
-      .nav{position: static}
-    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header class="nav">
-      <a class="brand" href="#top">
-        <div class="logo">LT</div>
-        <div>Landing.team</div>
-      </a>
+    <header>
+      <div class="nav" id="topNav">
+        <a class="brand" href="#top">
+          <div class="logo">LT</div>
+          <div>Landing.team</div>
+        </a>
 
-      <nav class="navlinks" aria-label="תפריט">
+        <nav class="navlinks" aria-label="תפריט">
+          <a href="#how">איך זה עובד</a>
+          <a href="#features">מה מקבלים</a>
+          <a href="#pricing">מחיר</a>
+          <a href="#faq">שאלות</a>
+        </nav>
+
+        <div class="ctaRow">
+          <a class="btn" href="https://wa.me/972000000000" target="_blank" rel="noopener">וואטסאפ</a>
+          <a class="btn btnPrimary" href="#lead">בוא נקים לך מיני־אתר</a>
+        </div>
+
+        <button class="btn menuBtn" id="menuBtn" type="button" aria-label="פתח תפריט" aria-expanded="false">
+          <div class="menuIcon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </button>
+      </div>
+
+      <div class="mobileMenu" id="mobileMenu" aria-label="תפריט מובייל">
         <a href="#how">איך זה עובד</a>
         <a href="#features">מה מקבלים</a>
         <a href="#pricing">מחיר</a>
         <a href="#faq">שאלות</a>
-      </nav>
 
-      <div class="ctaRow">
-        <a class="btn" href="https://wa.me/972547787837" target="_blank" rel="noopener">וואטסאפ</a>
-        <a class="btn btnPrimary" href="#lead">בוא נקים לך מיני־אתר</a>
+        <div class="miniRow">
+          <a class="btn btnGreen" href="https://wa.me/972000000000" target="_blank" rel="noopener">וואטסאפ</a>
+          <a class="btn btnPrimary" href="#lead">קבל הצעה</a>
+        </div>
       </div>
     </header>
 
@@ -406,7 +501,7 @@
                 <option>נותן שירות (ספר/קוסמטיקה/טכנאי)</option>
                 <option>קליניקה/רפואה משלימה</option>
                 <option>מוסך/שיפוצים/אינסטלציה</option>
-                <option>נדל"ן/עו"ד/פיננסים</option>
+                <option>נדל&quot;ן/עו&quot;ד/פיננסים</option>
                 <option>אחר</option>
               </select>
             </div>
@@ -416,8 +511,8 @@
               <textarea id="msg" name="msg" placeholder="לדוגמה: יותר פניות בוואטסאפ, דגש על אמינות, הצגת עבודות..."></textarea>
             </div>
 
-            <button class="btn btnPrimary" type="submit">שלחו לי הצעה</button>
-            <div class="miniNote">הטופס כרגע שולח אימייל דרך המחשב שלך. בשלב הבא נחבר ל-CRM/Sheets.</div>
+            <button class="btn btnPrimary" type="submit" style="min-height:48px">שלחו לי הצעה</button>
+            <div class="miniNote">הטופס כרגע שולח אימייל דרך המחשב שלך. בשלב הבא נחבר שליחת לידים אוטומטית.</div>
           </form>
         </aside>
       </section>
@@ -532,13 +627,40 @@
     </main>
   </div>
 
-  <div class="toast" id="toast">נשלח! אם לא נפתח מייל, נוכל לחבר שליחת לידים אוטומטית 🙂</div>
+  <div class="toast" id="toast">נשלח! אם לא נפתח מייל, נחבר שליחת לידים אוטומטית 🙂</div>
 
   <script>
     // שנה בפוטר
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // טופס: כרגע mailto כדי להראות "עובד" בלי שרת
+    // מובייל: תפריט
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const topNav = document.getElementById("topNav");
+
+    function closeMenu(){
+      mobileMenu.style.display = "none";
+      topNav.classList.remove("menuOpen");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    menuBtn.addEventListener("click", () => {
+      const open = mobileMenu.style.display === "block";
+      if(open){
+        closeMenu();
+      } else {
+        mobileMenu.style.display = "block";
+        topNav.classList.add("menuOpen");
+        menuBtn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    // סגירה בלחיצה על לינק
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => closeMenu());
+    });
+
+    // טופס: mailto (דמו בלי שרת)
     const form = document.getElementById("leadForm");
     const toast = document.getElementById("toast");
 
@@ -563,7 +685,6 @@
       // ✅ החלף למייל שלך:
       const to = "aliadbibi@gmail.com";
 
-      // פותח תוכנת מייל עם פרטים
       window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
 
       showToast();
@@ -572,4 +693,3 @@
   </script>
 </body>
 </html>
-
