@@ -1,1 +1,575 @@
-hello
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Landing.team בונה מיני-אתרים מהירים לעסקים קטנים. דף אחד שמביא פניות, וואטסאפ ושיחות." />
+  <title>Landing.team | מיני־אתר לעסק קטן</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#0f172a;
+      --muted:#94a3b8;
+      --text:#e2e8f0;
+      --line:rgba(148,163,184,.18);
+      --brand:#f59e0b; /* כתום */
+      --brand2:#22c55e; /* ירוק */
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius:20px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Heebo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 80% 0%, rgba(245,158,11,.22), transparent 60%),
+        radial-gradient(700px 450px at 10% 10%, rgba(34,197,94,.18), transparent 60%),
+        linear-gradient(180deg, #060814, #0b0f19 40%, #060814);
+      color:var(--text);
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 16px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      position: sticky; top: 14px; z-index: 50;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(245,158,11,.95), rgba(34,197,94,.9));
+      box-shadow: 0 10px 30px rgba(245,158,11,.25);
+      display:grid; place-items:center;
+      font-weight:900; color:#0b0f19;
+    }
+    .navlinks{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+    .navlinks a{
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius: 10px;
+      transition: .2s;
+    }
+    .navlinks a:hover{color:var(--text); background: rgba(148,163,184,.10)}
+    .ctaRow{display:flex; gap:10px; align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.7);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius: 12px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s;
+      display:inline-flex; align-items:center; gap:10px;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(245,158,11,.35)}
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(245,158,11,.95), rgba(245,158,11,.72));
+      color:#0b0f19;
+      border-color: rgba(245,158,11,.6);
+      box-shadow: 0 16px 40px rgba(245,158,11,.22);
+    }
+    .btnPrimary:hover{border-color: rgba(245,158,11,.9)}
+    .btnGreen{
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(34,197,94,.65));
+      color:#06230f;
+      border-color: rgba(34,197,94,.65);
+      box-shadow: 0 16px 40px rgba(34,197,94,.18);
+    }
+
+    .hero{
+      padding:48px 0 20px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items: start;
+    }
+    .pill{
+      display:inline-flex;
+      gap:10px; align-items:center;
+      padding:8px 12px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      color: var(--muted);
+      font-weight:700;
+      width: fit-content;
+    }
+    .h1{
+      font-size: clamp(30px, 4.3vw, 52px);
+      line-height: 1.05;
+      margin: 14px 0 10px;
+      letter-spacing: -.3px;
+    }
+    .lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 55ch;
+    }
+    .high{
+      color: var(--text);
+      font-weight:800;
+      background: linear-gradient(90deg, rgba(245,158,11,.35), rgba(34,197,94,.25));
+      padding: 0 8px;
+      border-radius: 10px;
+    }
+    .bullets{
+      display:grid; gap:10px;
+      margin-top: 14px;
+    }
+    .bullet{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+    }
+    .dot{
+      width:22px; height:22px; border-radius: 8px;
+      background: rgba(245,158,11,.18);
+      border:1px solid rgba(245,158,11,.35);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      margin-top:2px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.6);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHeader{
+      padding:16px 16px 0;
+    }
+    .cardHeader h3{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+    .cardHeader p{margin:0 0 12px; color:var(--muted)}
+    .form{
+      padding: 0 16px 16px;
+      display:grid;
+      gap:10px;
+    }
+    .field{
+      display:grid;
+      gap:6px;
+    }
+    label{color:var(--muted); font-weight:700; font-size:14px}
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.55);
+      color: var(--text);
+      outline:none;
+      font-family: inherit;
+      font-size: 15px;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(245,158,11,.55);
+      box-shadow: 0 0 0 4px rgba(245,158,11,.12);
+    }
+    textarea{min-height: 96px; resize: vertical}
+
+    .miniRow{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 14px;
+    }
+    .miniNote{
+      color:var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .section{
+      padding: 18px 0;
+    }
+    .sectionTitle{
+      font-size: 20px;
+      margin: 0 0 10px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .feature{
+      padding: 14px;
+      border-radius: 18px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+    }
+    .feature h4{margin:10px 0 6px}
+    .feature p{margin:0; color:var(--muted); line-height:1.55}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.14);
+      border:1px solid rgba(34,197,94,.35);
+      color: #b7f7cf;
+      font-weight:800;
+      width: fit-content;
+      font-size: 12px;
+    }
+
+    .pricing{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .priceCard{
+      padding: 16px;
+      border-radius: 20px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      position: relative;
+    }
+    .price{
+      font-size: 34px;
+      font-weight:900;
+      margin: 10px 0 6px;
+    }
+    .sub{color:var(--muted); margin:0 0 12px}
+    .list{margin: 12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
+    .list li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: var(--text);
+    }
+    .tick{
+      width:18px; height:18px; border-radius: 6px;
+      background: rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.35);
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+    .faq{
+      display:grid; gap:10px;
+    }
+    details{
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      color: var(--text);
+    }
+    details p{color:var(--muted); margin:10px 0 0; line-height:1.6}
+
+    .footer{
+      padding: 22px 0 36px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+    }
+    .footRow{
+      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    }
+
+    .toast{
+      position: fixed;
+      bottom: 16px;
+      inset-inline: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      display:none;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(2,6,23,.82);
+      border:1px solid rgba(148,163,184,.25);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    @media (max-width: 960px){
+      .hero{grid-template-columns: 1fr; padding-top: 26px}
+      .grid3{grid-template-columns: 1fr}
+      .pricing{grid-template-columns: 1fr}
+      .nav{position: static}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <a class="brand" href="#top">
+        <div class="logo">LT</div>
+        <div>Landing.team</div>
+      </a>
+
+      <nav class="navlinks" aria-label="תפריט">
+        <a href="#how">איך זה עובד</a>
+        <a href="#features">מה מקבלים</a>
+        <a href="#pricing">מחיר</a>
+        <a href="#faq">שאלות</a>
+      </nav>
+
+      <div class="ctaRow">
+        <a class="btn" href="https://wa.me/972547787837" target="_blank" rel="noopener">וואטסאפ</a>
+        <a class="btn btnPrimary" href="#lead">בוא נקים לך מיני־אתר</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="pill">⚡ מיני־אתר שמביא פניות תוך ימים, לא חודשים</div>
+          <h1 class="h1">
+            העסק שלך צריך בית קטן באינטרנט
+            <span class="high">שמייצר פניות</span>
+          </h1>
+          <p class="lead">
+            Landing.team בונה לעסקים קטנים מיני־אתר מהיר, נקי ורספונסיבי:
+            כותרת שמוכרת, וואטסאפ בלחיצה, טופס לידים, אמינות, ושקט נפשי.
+          </p>
+
+          <div class="miniRow">
+            <a class="btn btnGreen" href="#lead">אני רוצה מיני־אתר</a>
+            <a class="btn" href="#pricing">לראות מחירים</a>
+            <div class="miniNote">ללא התחייבות. אפשר להתחיל גם בפיילוט.</div>
+          </div>
+
+          <div class="bullets" aria-label="יתרונות">
+            <div class="bullet">
+              <div class="dot">✓</div>
+              <div>
+                <strong>מוכן לפרסום</strong>
+                <div style="color:var(--muted); margin-top:4px">דף מודרני, מהיר ומותאם מובייל, עם קריאה לפעולה ברורה.</div>
+              </div>
+            </div>
+            <div class="bullet">
+              <div class="dot">✓</div>
+              <div>
+                <strong>מכוון תוצאות</strong>
+                <div style="color:var(--muted); margin-top:4px">מבנה שמוביל לוואטסאפ/שיחה/טופס, בלי להסיח את הדעת.</div>
+              </div>
+            </div>
+            <div class="bullet">
+              <div class="dot">✓</div>
+              <div>
+                <strong>אתה לא מתעסק עם טכני</strong>
+                <div style="color:var(--muted); margin-top:4px">אנחנו הצוות שלך לדיגיטל: הקמה, תחזוקה ושיפורים.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card" id="lead">
+          <div class="cardHeader">
+            <h3>בוא נבנה לך מיני־אתר</h3>
+            <p>השאר פרטים ונחזור אליך עם הצעה קצרה + דוגמה.</p>
+          </div>
+
+          <form class="form" id="leadForm">
+            <div class="field">
+              <label for="name">שם מלא</label>
+              <input id="name" name="name" placeholder="לדוגמה: ברק תורתי" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">טלפון</label>
+              <input id="phone" name="phone" inputmode="tel" placeholder="050-0000000" required />
+            </div>
+
+            <div class="field">
+              <label for="biz">סוג העסק</label>
+              <select id="biz" name="biz" required>
+                <option value="" selected disabled>בחר</option>
+                <option>נותן שירות (ספר/קוסמטיקה/טכנאי)</option>
+                <option>קליניקה/רפואה משלימה</option>
+                <option>מוסך/שיפוצים/אינסטלציה</option>
+                <option>נדל"ן/עו"ד/פיננסים</option>
+                <option>אחר</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="msg">מה חשוב לך בדף?</label>
+              <textarea id="msg" name="msg" placeholder="לדוגמה: יותר פניות בוואטסאפ, דגש על אמינות, הצגת עבודות..."></textarea>
+            </div>
+
+            <button class="btn btnPrimary" type="submit">שלחו לי הצעה</button>
+            <div class="miniNote">הטופס כרגע שולח אימייל דרך המחשב שלך. בשלב הבא נחבר ל-CRM/Sheets.</div>
+          </form>
+        </aside>
+      </section>
+
+      <section class="section" id="how">
+        <h2 class="sectionTitle">איך זה עובד</h2>
+        <div class="grid3">
+          <div class="feature">
+            <div class="badge">שלב 1</div>
+            <h4>איסוף מידע קצר</h4>
+            <p>5 דקות: עסק, שירותים, אזור, תמונות, וואטסאפ. לא חפירות.</p>
+          </div>
+          <div class="feature">
+            <div class="badge">שלב 2</div>
+            <h4>בניית מיני־אתר</h4>
+            <p>עיצוב נקי + קופי שמוביל לפעולה + התאמה למובייל.</p>
+          </div>
+          <div class="feature">
+            <div class="badge">שלב 3</div>
+            <h4>עלייה לאוויר</h4>
+            <p>סאב־דומיין מוכן או דומיין של הלקוח. מהר, בלי דרמה.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <h2 class="sectionTitle">מה מקבלים</h2>
+        <div class="grid3">
+          <div class="feature">
+            <div class="badge">מובייל קודם</div>
+            <h4>רספונסיבי אמיתי</h4>
+            <p>תצוגה נקייה בטלפון, טאבלט ומחשב. זה 80% מהלידים.</p>
+          </div>
+          <div class="feature">
+            <div class="badge">ממיר</div>
+            <h4>CTA חזק</h4>
+            <p>וואטסאפ, שיחה, טופס. בלי תפריטים מיותרים, בלי הסחות.</p>
+          </div>
+          <div class="feature">
+            <div class="badge">אמינות</div>
+            <h4>הוכחה חברתית</h4>
+            <p>מוסיפים ביקורות, תמונות, שאלות נפוצות. אנשים קונים אמון.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pricing">
+        <h2 class="sectionTitle">מחיר פשוט</h2>
+        <div class="pricing">
+          <div class="priceCard">
+            <div class="badge">התחלה מהירה</div>
+            <h4 style="margin:10px 0 0">Mini-site</h4>
+            <div class="price">₪990</div>
+            <p class="sub">הקמה חד־פעמית (כולל עיצוב + טופס + וואטסאפ)</p>
+            <ul class="list">
+              <li><span class="tick"></span>דף אחד ממיר (RTL/EN)</li>
+              <li><span class="tick"></span>חיבור לדומיין/סאב־דומיין</li>
+              <li><span class="tick"></span>טופס לידים בסיסי</li>
+              <li><span class="tick"></span>אופטימיזציה מובייל</li>
+            </ul>
+            <div style="margin-top:14px">
+              <a class="btn btnPrimary" href="#lead">אני רוצה את זה</a>
+            </div>
+          </div>
+
+          <div class="priceCard" style="border-color: rgba(245,158,11,.35)">
+            <div class="badge" style="background: rgba(245,158,11,.14); border-color: rgba(245,158,11,.35); color:#ffe4b5">הכי משתלם</div>
+            <h4 style="margin:10px 0 0">Mini-site + תחזוקה</h4>
+            <div class="price">₪990 + ₪99/חודש</div>
+            <p class="sub">כולל אחסון, שינויים קטנים ותמיכה</p>
+            <ul class="list">
+              <li><span class="tick"></span>הכול מחבילת הבסיס</li>
+              <li><span class="tick"></span>אחסון + דומיין מנוהל</li>
+              <li><span class="tick"></span>עד 2 שינויים קטנים בחודש</li>
+              <li><span class="tick"></span>חיבור לפיקסל/אנליטיקס (בסיסי)</li>
+            </ul>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn btnPrimary" href="#lead">מתחילים</a>
+              <a class="btn" href="#faq">יש שאלות</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <h2 class="sectionTitle">שאלות נפוצות</h2>
+        <div class="faq">
+          <details>
+            <summary>כמה זמן לוקח לעלות לאוויר?</summary>
+            <p>בדרך כלל 24–72 שעות מרגע שיש לנו טקסטים/תמונות. אם צריך ממש מהר, עושים גרסת בסיס באותו יום.</p>
+          </details>
+          <details>
+            <summary>אפשר דומיין של הלקוח במקום סאב־דומיין?</summary>
+            <p>כן. אפשר להתחיל ב־<strong>client.landing.team</strong> ואז להעביר לדומיין שלו כשרוצים.</p>
+          </details>
+          <details>
+            <summary>הטופס באמת עובד?</summary>
+            <p>כן, כרגע הוא שולח אימייל דרך המחשב (פתיחת תוכנת מייל). בשלב הבא נחבר שליחה אמיתית ל-Google Sheets/CRM כדי שתקבל לידים אוטומטית.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="footer">
+        <div class="footRow">
+          <div>© <span id="year"></span> Landing.team</div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap">
+            <a class="btn" href="#top">חזרה למעלה</a>
+            <a class="btn btnGreen" href="#lead">קבל הצעה</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">נשלח! אם לא נפתח מייל, נוכל לחבר שליחת לידים אוטומטית 🙂</div>
+
+  <script>
+    // שנה בפוטר
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // טופס: כרגע mailto כדי להראות "עובד" בלי שרת
+    const form = document.getElementById("leadForm");
+    const toast = document.getElementById("toast");
+
+    function showToast(){
+      toast.style.display = "block";
+      setTimeout(()=> toast.style.display = "none", 4200);
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const biz = document.getElementById("biz").value;
+      const msg = document.getElementById("msg").value.trim();
+
+      const subject = encodeURIComponent("Lead חדש מ-Landing.team");
+      const body = encodeURIComponent(
+        `שם: ${name}\nטלפון: ${phone}\nסוג העסק: ${biz}\n\nהודעה:\n${msg || "-"}\n`
+      );
+
+      // ✅ החלף למייל שלך:
+      const to = "aliadbibi@gmail.com";
+
+      // פותח תוכנת מייל עם פרטים
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+
+      showToast();
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
