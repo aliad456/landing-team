@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Landing.Team | דפי נחיתה פרימיום</title>
+  <meta name="description" content="דפי נחיתה פרימיום לעסקים קטנים. דמואים מוכנים, התאמה מהירה, כפתורי טלפון/וואטסאפ, ולידים ל-Formspree." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fbfbff;
+      --paper: rgba(255,255,255,.78);
+      --ink: #0b0b0f;
+      --muted: rgba(11,11,15,.62);
+      --line: rgba(11,11,15,.10);
+
+      --blue:#2563eb;
+      --mint:#00b894;
+      --pink:#ff4f9a;
+      --gold:#d4af37;
+
+      --r14:14px; --r18:18px; --r24:24px; --r30:30px; --r40:40px;
+      --shadow: 0 30px 90px rgba(0,0,0,.12);
+      --shadow2: 0 16px 34px rgba(0,0,0,.10);
+      --max: 1180px;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    [data-theme="dark"]{
+      --bg: #0b0b10;
+      --paper: rgba(18,18,26,.72);
+      --ink: #f4f6ff;
+      --muted: rgba(244,246,255,.72);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 30px 90px rgba(0,0,0,.60);
+      --shadow2: 0 16px 34px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Heebo, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 12% 8%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 520px at 88% 18%, rgba(255,79,154,.11), transparent 60%),
+        radial-gradient(900px 520px at 55% 120%, rgba(0,184,148,.11), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      overflow-x:hidden;
+    }
+
+    .grain{
+      position:fixed; inset:0;
+      background:url("./assets/grain.svg");
+      opacity:.85;
+      pointer-events:none;
+      mix-blend-mode:multiply;
+      z-index:0;
+    }
+    [data-theme="dark"] .grain{opacity:.55; mix-blend-mode:overlay;}
+
+    a{color:inherit; text-decoration:none}
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(14px + var(--safe-top)) 18px calc(110px + var(--safe-bottom));
+      position:relative;
+      z-index:1;
+    }
+
+    /* Top bar */
+    .top{position:sticky; top: calc(10px + var(--safe-top)); z-index:50;}
+    .bar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding: 12px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow2);
+    }
+    .brand{display:flex; align-items:center; gap:10px}
+    .logo{
+      width:40px; height:40px; border-radius:16px;
+      background: conic-gradient(from 220deg, var(--blue), var(--pink), var(--mint), var(--gold), var(--blue));
+      box-shadow: 0 18px 44px rgba(0,0,0,.12);
+    }
+    .btxt{display:flex; flex-direction:column; line-height:1.05}
+    .btxt b{font-weight: 900; letter-spacing:.2px}
+    .btxt span{font-size:12px; color: var(--muted); font-weight:800}
+
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+    .nav a{padding:8px 10px; border-radius:12px; font-weight:900; color:var(--muted);}
+    .nav a:hover{background: rgba(11,11,15,.06); color: var(--ink);}
+    [data-theme="dark"] .nav a:hover{background: rgba(255,255,255,.08);}
+
+    .actions{display:flex; gap:10px; align-items:center}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      min-height: 44px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.88);
+      font-weight: 900;
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: .18s;
+      white-space:nowrap;
+    }
+    [data-theme="dark"] .btn{background: rgba(255,255,255,.06);}
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 18px 38px rgba(0,0,0,.12);}
+    .btn:active{transform: translateY(0);}
+    .btnPrimary{
+      border-color: rgba(37,99,235,.24);
+      background: linear-gradient(135deg, rgba(37,99,235,.92), rgba(0,184,148,.18));
+      color: #081126;
+    }
+    .btnWA{
+      border-color: rgba(0,184,148,.22);
+      background: linear-gradient(135deg, rgba(0,184,148,.92), rgba(74,222,128,.16));
+      color: #052016;
+    }
+
+    .themeToggle{
+      width:44px; height:44px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.88);
+      display:inline-flex; align-items:center; justify-content:center;
+      font-size: 18px;
+    }
+    [data-theme="dark"] .themeToggle{background: rgba(255,255,255,.06);}
+
+    /* Reveal */
+    .reveal{opacity:0; transform: translateY(14px); filter: blur(10px); transition: .78s cubic-bezier(.2,.8,.2,1);}
+    .reveal.in{opacity:1; transform: translateY(0); filter: blur(0);}
+    .d2{transition-delay:.08s} .d3{transition-delay:.14s} .d4{transition-delay:.22s}
+
+    /* Hero */
+    .hero{
+      padding: 20px 0 10px;
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      font-weight: 900;
+      width: fit-content;
+    }
+    h1{
+      margin: 12px 0 10px;
+      font-size: clamp(34px, 4.8vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.6px;
+      font-weight: 900;
+    }
+    .grad{
+      background: linear-gradient(90deg, var(--blue), var(--pink), var(--mint), var(--gold));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .lead{
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      font-weight: 700;
+      max-width: 64ch;
+    }
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top: 8px;}
+
+    .panel{
+      border:1px solid var(--line);
+      background: var(--paper);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panelTop{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid rgba(11,11,15,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.66));
+    }
+    [data-theme="dark"] .panelTop{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.74);
+      font-weight: 900;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+    [data-theme="dark"] .pill{background: rgba(255,255,255,.06);}
+    .dot{width:10px; height:10px; border-radius: 999px; background: var(--mint); box-shadow: 0 0 0 6px rgba(0,184,148,.14);}
+    .panelBody{padding: 14px;}
+    .stack{display:grid; gap:10px;}
+    .tile{
+      border:1px solid rgba(11,11,15,.10);
+      background: rgba(255,255,255,.78);
+      border-radius: 18px;
+      padding: 12px;
+      display:flex; gap:10px; align-items:center;
+    }
+    [data-theme="dark"] .tile{background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.10);}
+    .k{width:10px; height:10px; border-radius:999px; background: var(--blue);}
+    .k.p{background: var(--pink);}
+    .k.m{background: var(--mint);}
+    .k.g{background: var(--gold);}
+    .tile b{display:block; font-weight:900;}
+    .tile small{display:block; color: var(--muted); font-weight:800; line-height:1.5;}
+
+    /* Sections */
+    .section{padding: 18px 0;}
+    .head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom: 12px;}
+    .h2{margin:0; font-size: 22px; font-weight: 900; letter-spacing:-.2px;}
+    .sub{margin:0; color: var(--muted); font-weight: 700; line-height: 1.7;}
+
+    /* Demos */
+    .demos{display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px;}
+    .demo{
+      border:1px solid var(--line);
+      background: var(--paper);
+      border-radius: 30px;
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 280px;
+    }
+    .demoMedia{
+      background:
+        radial-gradient(420px 320px at 20% 15%, rgba(255,79,154,.12), transparent 60%),
+        radial-gradient(420px 320px at 85% 45%, rgba(37,99,235,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.56));
+      padding: 14px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    [data-theme="dark"] .demoMedia{
+      background:
+        radial-gradient(420px 320px at 20% 15%, rgba(255,79,154,.16), transparent 60%),
+        radial-gradient(420px 320px at 85% 45%, rgba(37,99,235,.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    }
+
+    .demoMedia img{
+      width:100%;
+      height:100%;
+      max-height: 245px;
+      object-fit:cover;
+      border-radius: 22px;
+      border:1px solid rgba(11,11,15,.08);
+      background:#fff;
+      box-shadow: 0 18px 44px rgba(0,0,0,.10);
+    }
+    .demoBody{padding: 18px; display:flex; flex-direction:column; gap:10px;}
+    .demoBody b{font-size:18px; font-weight:900;}
+    .demoBody small{color: var(--muted); font-weight:800; line-height:1.6;}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+    .chip{padding:6px 10px; border-radius:999px; border:1px solid var(--line); background: rgba(255,255,255,.60); font-weight:900; font-size:12px; color: var(--muted);}
+    [data-theme="dark"] .chip{background: rgba(255,255,255,.05);}
+    .demoActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto;}
+
+    /* Quote form */
+    .quote{display:grid; grid-template-columns: 1.05fr .95fr; gap: 12px; align-items:start;}
+    .form{
+      border:1px solid var(--line);
+      background: var(--paper);
+      border-radius: 30px;
+      box-shadow: var(--shadow2);
+      padding: 18px;
+    }
+    .formGrid{display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;}
+    label{display:block; font-weight:900; font-size:12px; color: var(--muted); margin: 0 0 6px;}
+    input, select, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(11,11,15,.12);
+      background: rgba(255,255,255,.92);
+      font-family: inherit;
+      font-weight: 700;
+      outline:none;
+      color: var(--ink);
+    }
+    [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.12);
+      color: var(--ink);
+    }
+    textarea{min-height: 110px; resize: vertical;}
+    .formActions{display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; align-items:center;}
+    .note{font-size:12px; color: var(--muted); font-weight:800; line-height:1.6;}
+    .ok,.err{display:none; margin-top: 10px; padding: 12px; border-radius: 18px; font-weight:900;}
+    .ok{border:1px solid rgba(0,184,148,.22); background: rgba(0,184,148,.10);}
+    .err{border:1px solid rgba(255,79,154,.22); background: rgba(255,79,154,.08);}
+
+    /* Sticky mobile CTA */
+    .sticky{
+      position: fixed;
+      left: 0; right: 0;
+      bottom: 0;
+      padding: 10px 12px calc(10px + var(--safe-bottom));
+      background: rgba(255,255,255,.86);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      z-index: 80;
+      display:none;
+    }
+    [data-theme="dark"] .sticky{background: rgba(18,18,26,.78);}
+    .stickyRow{max-width: var(--max); margin: 0 auto; display:flex; gap:10px;}
+    .sticky .btn{flex:1;}
+
+    /* Quiz modal */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.42);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 200;
+      padding: 18px;
+    }
+    .modalCard{
+      width: min(720px, 100%);
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    [data-theme="dark"] .modalCard{background: rgba(18,18,26,.92);}
+    .modalHead{padding: 14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line);}
+    .modalHead b{font-size:16px;}
+    .x{width:40px; height:40px; border-radius:14px; border:1px solid var(--line); background: rgba(255,255,255,.86); cursor:pointer;}
+    [data-theme="dark"] .x{background: rgba(255,255,255,.06);}
+    .modalBody{padding: 16px;}
+    .q{display:none;}
+    .q.active{display:block;}
+    .q p{margin:0 0 10px; font-weight:900; font-size:16px;}
+    .q .opts{display:flex; flex-wrap:wrap; gap:10px;}
+    .q .opts .btn{flex: 1; min-width: 160px;}
+    .mini{margin-top:10px; color: var(--muted); font-weight:800; font-size:12px; line-height:1.6;}
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr;}
+      .nav{display:none;}
+      .demos{grid-template-columns: 1fr;}
+      .demo{grid-template-columns: 1fr;}
+      .demoMedia img{max-height: 260px;}
+      .quote{grid-template-columns: 1fr;}
+      .formGrid{grid-template-columns: 1fr;}
+      .sticky{display:block;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="top">
+      <header class="bar reveal">
+        <a class="brand" href="#top">
+          <span class="logo" aria-hidden="true"></span>
+          <span class="btxt">
+            <b>Landing.Team</b>
+            <span>דפי נחיתה פרימיום שמביאים פניות</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="תפריט">
+          <a href="#demos">דמואים</a>
+          <a href="#quote">קבל הצעה</a>
+          <a href="#pricing">מחירים</a>
+          <a href="#faq">שאלות</a>
+        </nav>
+
+        <div class="actions">
+          <button class="themeToggle" id="themeBtn" aria-label="מצב כהה/בהיר">🌙</button>
+          <a class="btn btnWA" id="waTop" href="https://wa.me/972500000000" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btnPrimary" href="#quote">קבל הצעה</a>
+        </div>
+      </header>
+    </div>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="tag reveal d2">⚡ מוכן לאוויר מהר · מובייל קודם · WhatsApp/טלפון · לידים ל־Formspree</div>
+
+          <h1 class="reveal d3">
+            דפי נחיתה <span class="grad">ברמת פרימיום</span> לעסקים קטנים
+          </h1>
+
+          <p class="lead reveal d4">
+            אתה בוחר דמו, אנחנו מתאימים שם, צבעים, טקסטים וקישורים, ועולים לסאב-דומיין שלך.
+            נראה כמו “מותג”, עולה כמו “סטארטר”.
+          </p>
+
+          <div class="ctaRow reveal d4">
+            <button class="btn btnPrimary" id="openQuiz">מצא את הדמו שמתאים לך</button>
+            <a class="btn btnWA" id="waHero" href="https://wa.me/972500000000" target="_blank" rel="noopener">WhatsApp לשיחה</a>
+            <a class="btn" href="#demos">צפה בדמואים ↓</a>
+          </div>
+        </div>
+
+        <aside class="panel reveal d2" aria-label="למה זה עובד">
+          <div class="panelTop">
+            <span class="pill"><span class="dot"></span> תהליך קצר, תוצאה גדולה</span>
+            <span class="pill">מהיר · נקי · ממיר</span>
+          </div>
+          <div class="panelBody">
+            <div class="stack">
+              <div class="tile"><span class="k"></span><div><b>CTA שמביא פניות</b><small>טלפון + WhatsApp בול בעין, במיוחד במובייל.</small></div></div>
+              <div class="tile"><span class="k p"></span><div><b>UX ברמה גבוהה</b><small>אנימציות, היררכיה, ריווח, “תחושת מותג”.</small></div></div>
+              <div class="tile"><span class="k m"></span><div><b>סאב-דומיין לכל לקוח</b><small>מסודר, קל, ומרגיש מקצועי: client.landing.team</small></div></div>
+              <div class="tile"><span class="k g"></span><div><b>לידים אצלך</b><small>חיבור ל־Formspree: גם במערכת וגם במייל.</small></div></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="demos">
+        <div class="head reveal">
+          <div>
+            <h2 class="h2">דמואים באוויר</h2>
+            <p class="sub">הנה הדמואים שלך. לחץ כדי לפתוח. (אפשר להוסיף עוד בקלות)</p>
+          </div>
+          <a class="btn" href="#quote">קבל הצעה ↓</a>
+        </div>
+
+        <div class="demos">
+          <article class="demo reveal">
+            <div class="demoMedia"><img src="./assets/preview-barber.svg" alt="דמו ספרים פרימיום"></div>
+            <div class="demoBody">
+              <b>BARBER</b>
+              <small>גברי-יוקרתי, נקי וממיר. מושלם לספרים/קליניקות גבריות.</small>
+              <div class="chips">
+                <span class="chip">פרימיום</span><span class="chip">WhatsApp</span><span class="chip">Mobile-first</span>
+              </div>
+              <div class="demoActions">
+                <a class="btn btnPrimary" href="https://barber.landing.team" target="_blank" rel="noopener">צפה בדמו</a>
+                <button class="btn" data-pick="BARBER">בחר דמו</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="demo reveal d2">
+            <div class="demoMedia"><img src="./assets/preview-plumber.svg" alt="דמו אינסטלטור חירום"></div>
+            <div class="demoBody">
+              <b>PLUMBER</b>
+              <small>חירום, אמון, דגש על זמן הגעה ואזור שירות. עובד חזק בגוגל.</small>
+              <div class="chips">
+                <span class="chip">חירום</span><span class="chip">אזורי</span><span class="chip">אמון</span>
+              </div>
+              <div class="demoActions">
+                <a class="btn btnPrimary" href="https://plumber.landing.team" target="_blank" rel="noopener">צפה בדמו</a>
+                <button class="btn" data-pick="PLUMBER">בחר דמו</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="demo reveal d3">
+            <div class="demoMedia"><img src="./assets/preview-cosmetics.svg" alt="דמו קוסמטיקה"></div>
+            <div class="demoBody">
+              <b>COSMETICS</b>
+              <small>נשי-יוקרתי: לפני/אחרי, דירוגים, תחושת קליניקה מקצועית.</small>
+              <div class="chips">
+                <span class="chip">Before/After</span><span class="chip">Reviews</span><span class="chip">Booking</span>
+              </div>
+              <div class="demoActions">
+                <a class="btn btnPrimary" href="https://cosmetics.landing.team" target="_blank" rel="noopener">צפה בדמו</a>
+                <button class="btn" data-pick="COSMETICS">בחר דמו</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="demo reveal d4">
+            <div class="demoMedia"><img src="./assets/preview-trainer.svg" alt="דמו מאמן כושר"></div>
+            <div class="demoBody">
+              <b>TRAINER</b>
+              <small>שחור/לבן/זהב, וייב של פרימיום. מצוין למאמנים ובניית מותג.</small>
+              <div class="chips">
+                <span class="chip">Gold</span><span class="chip">Apps</span><span class="chip">Luxury</span>
+              </div>
+              <div class="demoActions">
+                <a class="btn btnPrimary" href="https://trainer.landing.team" target="_blank" rel="noopener">צפה בדמו</a>
+                <button class="btn" data-pick="TRAINER">בחר דמו</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="quote">
+        <div class="head reveal">
+          <div>
+            <h2 class="h2">קבל הצעת מחיר ב־60 שניות</h2>
+            <p class="sub">ממלאים קצר, ונשלח לך הצעה. הליד נכנס אצלך ל־Formspree וגם למייל.</p>
+          </div>
+          <a class="btn btnWA" id="waQuote" href="https://wa.me/972500000000" target="_blank" rel="noopener">או WhatsApp</a>
+        </div>
+
+        <div class="quote">
+          <div class="panel reveal d2">
+            <div class="panelTop">
+              <span class="pill"><span class="dot"></span> מה תקבל</span>
+              <span class="pill">מהיר · ברור · ממיר</span>
+            </div>
+            <div class="panelBody">
+              <div class="stack">
+                <div class="tile"><span class="k"></span><div><b>התאמה מלאה לדמו</b><small>שם, טקסטים, צבעים, קישורים, כפתורי פעולה.</small></div></div>
+                <div class="tile"><span class="k m"></span><div><b>עלייה לסאב-דומיין</b><small>client.landing.team תוך זמן קצר.</small></div></div>
+                <div class="tile"><span class="k p"></span><div><b>כפתורי מובייל</b><small>טלפון + WhatsApp עם CTA נכון.</small></div></div>
+                <div class="tile"><span class="k g"></span><div><b>לידים אצלך</b><small>Formspree: ניהול + מיילים, בלי מערכות כבדות.</small></div></div>
+              </div>
+            </div>
+          </div>
+
+          <form class="form reveal d3" id="leadForm" method="POST" action="https://formspree.io/f/xqeezyge">
+            <div class="pill" style="display:inline-flex; margin-bottom:10px">📩 פרטי ליד</div>
+
+            <div class="formGrid">
+              <div>
+                <label>שם מלא</label>
+                <input name="name" required placeholder="לדוגמה: דני כהן" />
+              </div>
+              <div>
+                <label>טלפון</label>
+                <input name="phone" required placeholder="050-0000000" inputmode="tel" />
+              </div>
+              <div>
+                <label>סוג עסק</label>
+                <select name="business_type" required>
+                  <option value="">בחר…</option>
+                  <option>ספרים</option>
+                  <option>אינסטלטור</option>
+                  <option>קוסמטיקה</option>
+                  <option>מאמן כושר</option>
+                  <option>אחר</option>
+                </select>
+              </div>
+              <div>
+                <label>דמו מועדף</label>
+                <select name="preferred_demo" id="preferredDemo" required>
+                  <option value="">בחר…</option>
+                  <option>BARBER</option>
+                  <option>PLUMBER</option>
+                  <option>COSMETICS</option>
+                  <option>TRAINER</option>
+                </select>
+              </div>
+              <div style="grid-column: 1 / -1">
+                <label>מה חשוב לך בדף?</label>
+                <textarea name="notes" placeholder="לדוגמה: אזור שירות, שירותים, צבעים, לוגו קיים…"></textarea>
+              </div>
+            </div>
+
+            <input type="hidden" name="source" value="landing.team main page" />
+            <input type="hidden" name="page" value="/" />
+
+            <div class="formActions">
+              <button class="btn btnPrimary" type="submit">שלח וקבל הצעה</button>
+              <span class="note">בלחיצה אתה מסכים שיצרו איתך קשר. אין ספאם.</span>
+            </div>
+
+            <div class="ok" id="ok">✅ נשלח! נחזור אליך בהקדם.</div>
+            <div class="err" id="err">❌ משהו לא הסתדר. נסה שוב או שלח WhatsApp.</div>
+          </form>
+        </div>
+      </section>
+
+      <section class="section" id="pricing">
+        <div class="head reveal">
+          <div>
+            <h2 class="h2">מחירים</h2>
+            <p class="sub">תמחור פשוט. אפשר לשנות מספרים חופשי.</p>
+          </div>
+          <a class="btn" href="#faq">שאלות ↓</a>
+        </div>
+
+        <div class="demos" style="grid-template-columns: repeat(3,1fr)">
+          <div class="panel reveal" style="padding:16px">
+            <b>Basic</b>
+            <div style="font-size:32px; font-weight:900; margin:6px 0">₪299</div>
+            <div class="sub">דף מבוסס דמו</div>
+            <ul style="margin:10px 0 0; padding:0 18px 0 0; color:var(--muted); font-weight:800; line-height:1.85">
+              <li>התאמת טקסטים + צבעים</li>
+              <li>טלפון + WhatsApp</li>
+              <li>פריסה לסאב-דומיין</li>
+            </ul>
+          </div>
+
+          <div class="panel reveal d2" style="padding:16px; border-color: rgba(37,99,235,.24)">
+            <b>Pro</b>
+            <div style="font-size:32px; font-weight:900; margin:6px 0">₪499</div>
+            <div class="sub">הכי נמכר</div>
+            <ul style="margin:10px 0 0; padding:0 18px 0 0; color:var(--muted); font-weight:800; line-height:1.85">
+              <li>כל מה שב-Basic</li>
+              <li>אזורי שירות / שירותים</li>
+              <li>כותרות להמרה</li>
+              <li>חיבור לידים (אם צריך)</li>
+            </ul>
+          </div>
+
+          <div class="panel reveal d3" style="padding:16px">
+            <b>Ultra</b>
+            <div style="font-size:32px; font-weight:900; margin:6px 0">₪799</div>
+            <div class="sub">מראה של מותג</div>
+            <ul style="margin:10px 0 0; padding:0 18px 0 0; color:var(--muted); font-weight:800; line-height:1.85">
+              <li>כל מה ב-Pro</li>
+              <li>אנימציות/סקשנים מתקדמים</li>
+              <li>Testimonials/Before-After</li>
+              <li>פיין-טיונינג למובייל</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="head reveal">
+          <div>
+            <h2 class="h2">שאלות נפוצות</h2>
+            <p class="sub">קצר ולעניין.</p>
+          </div>
+          <a class="btn btnPrimary" href="#quote">קבל הצעה</a>
+        </div>
+
+        <div class="demos" style="grid-template-columns: repeat(2,1fr)">
+          <div class="panel reveal" style="padding:16px">
+            <b>כמה זמן לוקח לעלות דף?</b>
+            <div class="sub" style="margin-top:6px">בדרך כלל באותו יום: בוחרים דמו, שולחים פרטים, אנחנו מעלים.</div>
+          </div>
+          <div class="panel reveal d2" style="padding:16px">
+            <b>אפשר לשנות טקסטים/צבעים?</b>
+            <div class="sub" style="margin-top:6px">כן. זה הבסיס: דמו חזק + התאמה לעסק.</div>
+          </div>
+          <div class="panel reveal d3" style="padding:16px">
+            <b>איפה זה מאוחסן?</b>
+            <div class="sub" style="margin-top:6px">על Vercel והדומיין שלך. בלי נעילות.</div>
+          </div>
+          <div class="panel reveal d4" style="padding:16px">
+            <b>מה צריך ממני?</b>
+            <div class="sub" style="margin-top:6px">שם העסק, טלפון, אזור שירות, 3–6 שירותים, ואם יש לוגו.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="reveal" style="margin-top:18px; padding: 18px 0 10px; border-top:1px solid var(--line); color:var(--muted); font-weight:800">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+          <div>© <span id="year"></span> Landing.Team</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" id="openQuiz2">מצא דמו</button>
+            <a class="btn btnWA" id="waFoot" href="https://wa.me/972500000000" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="sticky">
+    <div class="stickyRow">
+      <a class="btn btnPrimary" href="#quote">⚡ קבל הצעה</a>
+      <a class="btn btnWA" id="waSticky" href="https://wa.me/972500000000" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Quiz Modal -->
+  <div class="modal" id="modal">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="בדיקת התאמה">
+      <div class="modalHead">
+        <b>בדיקת התאמה ב־30 שניות</b>
+        <button class="x" id="closeModal" aria-label="סגור">✕</button>
+      </div>
+      <div class="modalBody">
+        <div class="q active" data-step="0">
+          <p>איזה סוג עסק זה?</p>
+          <div class="opts">
+            <button class="btn" data-ans="BARBER">ספר/Barber</button>
+            <button class="btn" data-ans="PLUMBER">אינסטלטור</button>
+            <button class="btn" data-ans="COSMETICS">קוסמטיקה</button>
+            <button class="btn" data-ans="TRAINER">מאמן כושר</button>
+          </div>
+          <div class="mini">נבחר לך דמו מומלץ ונקפיץ אותך לטופס עם בחירה מוכנה.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ✅ שינוי וואטסאפ כאן (מספר בינלאומי בלי 0)
+    const WA = "972500000000";
+    const waHref = "https://wa.me/" + WA;
+
+    ["waTop","waHero","waQuote","waFoot","waSticky"].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.href = waHref;
+    });
+
+    // Theme toggle
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    function setTheme(t) {
+      if(t === "dark") root.setAttribute("data-theme","dark");
+      else root.removeAttribute("data-theme");
+      localStorage.setItem("lt_theme", t || "light");
+      themeBtn.textContent = root.hasAttribute("data-theme") ? "☀️" : "🌙";
+    }
+    const saved = localStorage.getItem("lt_theme");
+    if(saved === "dark") setTheme("dark"); else setTheme("light");
+    themeBtn.addEventListener("click", () => setTheme(root.hasAttribute("data-theme") ? "light" : "dark"));
+
+    // Reveal animations
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      }
+    }, {threshold: 0.14});
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Formspree AJAX
+    const form = document.getElementById("leadForm");
+    const ok = document.getElementById("ok");
+    const err = document.getElementById("err");
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      ok.style.display = "none";
+      err.style.display = "none";
+      const fd = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: fd,
+          headers: { "Accept": "application/json" }
+        });
+        if(res.ok){
+          form.reset();
+          ok.style.display = "block";
+        } else {
+          err.style.display = "block";
+        }
+      } catch(e) {
+        err.style.display = "block";
+      }
+    });
+
+    // Pick demo buttons -> set select
+    const preferred = document.getElementById("preferredDemo");
+    document.querySelectorAll("[data-pick]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        preferred.value = btn.getAttribute("data-pick");
+        location.hash = "#quote";
+        preferred.focus();
+      });
+    });
+
+    // Quiz modal (simple + effective)
+    const modal = document.getElementById("modal");
+    const openQuiz = document.getElementById("openQuiz");
+    const openQuiz2 = document.getElementById("openQuiz2");
+    const closeModal = document.getElementById("closeModal");
+
+    function showModal() { modal.style.display = "flex"; }
+    function hideModal() { modal.style.display = "none"; }
+
+    openQuiz.addEventListener("click", showModal);
+    openQuiz2.addEventListener("click", showModal);
+    closeModal.addEventListener("click", hideModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) hideModal(); });
+
+    modal.querySelectorAll("[data-ans]").forEach(b => {
+      b.addEventListener("click", () => {
+        const ans = b.getAttribute("data-ans");
+        preferred.value = ans;
+        hideModal();
+        location.hash = "#quote";
+      });
+    });
+
+    // Exit-intent (desktop only)
+    let exitShown = false;
+    document.addEventListener("mouseleave", (e)=>{
+      if(exitShown) return;
+      if(window.innerWidth < 980) return;
+      if(e.clientY < 10){
+        exitShown = true;
+        showModal();
+      }
+    });
+  </script>
+</body>
+</html>
