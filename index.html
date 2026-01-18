@@ -53,7 +53,7 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%; /* כפתורים רחבים במחירים */
+            width: 100%;
             text-align: center;
         }
 
@@ -142,7 +142,7 @@
             padding: 10px 25px !important;
             border-radius: 50px;
             color: white !important;
-            width: auto; /* תיקון רוחב לכפתור בניווט */
+            width: auto;
         }
         .nav-cta::after { display: none; }
         .nav-cta:hover { background: var(--primary-hover); }
@@ -182,7 +182,7 @@
 
         /* SCROLL TO TOP BUTTON (LEFT BOTTOM) */
         #scrollTopBtn {
-            display: none; /* מוסתר בהתחלה */
+            display: none;
             position: fixed;
             bottom: 30px;
             left: 30px;
@@ -200,7 +200,7 @@
             transition: 0.3s;
             text-align: center;
             line-height: 50px;
-            padding: 0; /* איפוס padding */
+            padding: 0;
         }
 
         #scrollTopBtn:hover {
@@ -267,36 +267,47 @@
             margin: 0 auto 40px auto;
         }
 
-        .stats-container {
+        /* --- UPDATED: VALUE PROPOSITION CARDS (INSTEAD OF STATS) --- */
+        .features-container {
             display: flex;
             justify-content: center;
-            gap: 60px;
+            gap: 30px;
             margin-top: 80px;
             flex-wrap: wrap;
+            padding: 0 10px;
         }
 
-        .stat-box {
+        .feature-box {
             background: var(--card-bg);
-            padding: 30px 50px;
+            padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            min-width: 250px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            transition: 0.3s;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
         }
 
-        .counter {
-            font-size: 4rem;
-            font-weight: 900;
+        .feature-icon {
+            font-size: 3rem;
             color: var(--primary);
-            display: block;
+            margin-bottom: 20px;
         }
 
-        .stat-label {
-            font-size: 1.2rem;
-            color: var(--text-gray);
+        .feature-text {
+            font-size: 1.25rem;
+            color: var(--text-light);
             font-weight: 700;
+            line-height: 1.4;
         }
+
 
         /* PORTFOLIO */
         .portfolio-section { background: #151F32; }
@@ -355,11 +366,11 @@
         .pricing-section { text-align: center; }
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* תמיכה ב-3 עמודות */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
-            align-items: center; /* יישור אנכי */
+            align-items: center;
         }
         
         .price-card {
@@ -376,7 +387,7 @@
 
         .price-card.popular {
             border: 2px solid var(--primary);
-            transform: scale(1.05); /* הבלטה לחבילה האמצעית */
+            transform: scale(1.05);
             z-index: 2;
             background: #1e293b;
             box-shadow: 0 20px 50px rgba(255, 159, 28, 0.15);
@@ -437,17 +448,14 @@
             .nav-links { display: none; }
             .hero h1 { font-size: 3rem; }
             .hero p.subtitle { font-size: 1.2rem; }
-            .stats-container { flex-direction: column; gap: 30px; }
+            .features-container { flex-direction: column; gap: 20px; }
             .portfolio-grid { grid-template-columns: 1fr; }
             .form-grid { grid-template-columns: 1fr; }
             .contact-container { padding: 30px; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } /* כרטיסים אחד מתחת לשני במובייל */
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
             .price-card.popular { transform: none; }
             
-            /* התאמת כפתור חזרה למעלה במובייל */
             #scrollTopBtn { bottom: 20px; left: 20px; width: 45px; height: 45px; line-height: 45px; }
-            
-            /* התאמת סרגל סושיאל במובייל - נשאר צף מימין אך קטן יותר */
             .social-sidebar a { padding: 10px; width: 45px; height: 45px; font-size: 1.2rem; }
         }
     </style>
@@ -501,19 +509,23 @@
                 <a href="#portfolio" class="btn btn-outline" style="margin-right: 20px; width: auto;">לראות עבודות</a>
             </div>
 
-            <div class="stats-container" id="stats-section">
-                <div class="stat-box">
-                    <span class="counter" data-target="10">0</span>
-                    <span class="stat-label">שנות ניסיון +</span>
+            <div class="features-container">
+                
+                <div class="feature-box">
+                    <div class="feature-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="feature-text">בחרנו עבורכם את אנשי המקצוע הטובים ביותר בתחום</div>
                 </div>
-                <div class="stat-box">
-                    <span class="counter" data-target="700">0</span>
-                    <span class="stat-label">פרויקטים שנבנו +</span>
+
+                <div class="feature-box">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <div class="feature-text">זמינות מלאה עבור הלקוחות שלנו</div>
                 </div>
-                <div class="stat-box">
-                    <span class="counter" data-target="98">0</span>
-                    <span class="stat-label">אחוזי שביעות רצון %</span>
+
+                <div class="feature-box">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <div class="feature-text">יוצרים עבורכם עם מיטב כלי AI בכדי למקסם את המכירות שלכם</div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -666,7 +678,6 @@
 
         window.onscroll = function() {
             scrollFunction();
-            // גם הקוד של ההדר נמצא כאן (בנפרד למעלה) אבל הוספנו את הפונקציה הזו
         };
 
         function scrollFunction() {
@@ -680,46 +691,6 @@
         function topFunction() {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
-
-        // Animated Counters Script
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200;
-
-        const startCounters = () => {
-            counters.forEach(counter => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const inc = target / speed;
-
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(updateCount, 30);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCount();
-            });
-        };
-
-        let options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
-
-        let observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    startCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, options);
-
-        observer.observe(document.getElementById('stats-section'));
-
     </script>
 </body>
 </html>
