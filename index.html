@@ -1,261 +1,725 @@
-<!doctype html>
-<html lang="he" dir="rtl" data-theme="dark">
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
-  <title>Landing.Team | אתרי מכירה פרימיום לעסקים קטנים</title>
-  <meta name="description" content="Landing.Team בונה אתרי מכירה ודפי נחיתה פרימיום שמביאים פניות. רספונסיבי, מהיר, ועם כפתורי WhatsApp / טלפון.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing.team - דפי נחיתה שממירים תנועה ללקוחות</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* פלטת צבעים SaaS מודרנית */
+            --primary: #FF9F1C; /* כתום-זהב עז */
+            --primary-hover: #E88D0C;
+            --secondary: #2EC4B6; /* טורקיז חי */
+            --dark-bg: #0F172A; /* רקע כהה עמוק */
+            --card-bg: #1E293B; /* רקע כרטיסים */
+            --text-light: #F8FAFC;
+            --text-gray: #94A3B8;
+            --gradient-main: linear-gradient(135deg, var(--primary) 0%, #FF5F1F 100%);
+        }
 
-  <link rel="stylesheet" href="./assets/styles.css" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        section { padding: 100px 20px; }
+
+        /* כפתורים גלובליים */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%; /* כפתורים רחבים במחירים */
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px -10px rgba(255, 159, 28, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -10px rgba(255, 159, 28, 0.7);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 40px;
+            transition: 0.4s;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* LOGO SVG */
+        .logo svg {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+        
+        .nav-cta {
+            background: var(--primary);
+            padding: 10px 25px !important;
+            border-radius: 50px;
+            color: white !important;
+            width: auto; /* תיקון רוחב לכפתור בניווט */
+        }
+        .nav-cta::after { display: none; }
+        .nav-cta:hover { background: var(--primary-hover); }
+
+        /* FLOATING SOCIAL SIDEBAR (RIGHT) */
+        .social-sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            background: #1E293B;
+            border-radius: 10px 0 0 10px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-right: none;
+        }
+
+        .social-sidebar a {
+            padding: 15px;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+        }
+
+        .social-sidebar a.whatsapp:hover { background: #25D366; color: white; }
+        .social-sidebar a.instagram:hover { background: #C13584; color: white; }
+        .social-sidebar a.facebook:hover { background: #4267B2; color: white; }
+
+        /* SCROLL TO TOP BUTTON (LEFT BOTTOM) */
+        #scrollTopBtn {
+            display: none; /* מוסתר בהתחלה */
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 99;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            outline: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(255, 159, 28, 0.4);
+            transition: 0.3s;
+            text-align: center;
+            line-height: 50px;
+            padding: 0; /* איפוס padding */
+        }
+
+        #scrollTopBtn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-5px);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 120px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,159,28,0.15) 0%, rgba(15,23,42,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+         .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46,196,182,0.1) 0%, rgba(15,23,42,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 80px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            padding: 30px 50px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            min-width: 250px;
+        }
+
+        .counter {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            font-weight: 700;
+        }
+
+        /* PORTFOLIO */
+        .portfolio-section { background: #151F32; }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 3.5rem; font-weight: 900; margin-bottom: 15px; }
+        .section-header span { color: var(--primary); }
+        .section-header p { font-size: 1.3rem; color: var(--text-gray); }
+
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: 0.4s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .portfolio-item:hover { transform: translateY(-10px); border-color: var(--primary); }
+
+        .portfolio-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: 0.4s;
+            filter: brightness(0.7);
+        }
+
+        .portfolio-item:hover .portfolio-bg { transform: scale(1.1); filter: brightness(0.4); }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(15,23,42,0.9), transparent);
+            z-index: 2;
+        }
+
+        .portfolio-overlay h3 { font-size: 2rem; margin-bottom: 10px; }
+        .portfolio-link { display: inline-flex; align-items: center; gap: 10px; color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+
+        /* PRICING GRID UPDATED - 3 COLUMNS */
+        .pricing-section { text-align: center; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* תמיכה ב-3 עמודות */
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center; /* יישור אנכי */
+        }
+        
+        .price-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        
+        .price-card:hover { transform: translateY(-10px); }
+
+        .price-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05); /* הבלטה לחבילה האמצעית */
+            z-index: 2;
+            background: #1e293b;
+            box-shadow: 0 20px 50px rgba(255, 159, 28, 0.15);
+        }
+        
+        .price-card.popular:hover { transform: scale(1.05) translateY(-10px); }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--primary);
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .price-header h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--text-light); }
+        .price { font-size: 3rem; font-weight: 900; color: var(--primary); }
+        .price span { font-size: 1rem; color: var(--text-gray); font-weight: 400; }
+        .features-list { margin: 30px 0; text-align: right; padding: 0 10px; }
+        .features-list li { margin-bottom: 15px; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+        .features-list li i { color: var(--secondary); font-size: 1.1rem; }
+        .features-list li.disabled { color: rgba(255,255,255,0.3); text-decoration: line-through; }
+        .features-list li.disabled i { color: #475569; }
+
+        /* CONTACT FORM */
+        .contact-section { background: #151F32; position: relative; }
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 60px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: var(--primary); }
+        .form-input {
+            width: 100%; padding: 15px 20px; background: var(--dark-bg); border: 2px solid #2A3B5C;
+            border-radius: 10px; color: var(--text-light); font-size: 1.1rem; font-family: 'Heebo'; transition: 0.3s;
+        }
+        .form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 159, 28, 0.2); }
+        textarea.form-input { resize: vertical; height: 150px; }
+        .full-width { grid-column: 1 / -1; }
+
+        /* FOOTER */
+        footer { padding: 50px; text-align: center; background: #0a101f; border-top: 1px solid #1E293B; }
+        footer p { color: var(--text-gray); }
+        footer strong { color: var(--primary); }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .hero p.subtitle { font-size: 1.2rem; }
+            .stats-container { flex-direction: column; gap: 30px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .contact-container { padding: 30px; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } /* כרטיסים אחד מתחת לשני במובייל */
+            .price-card.popular { transform: none; }
+            
+            /* התאמת כפתור חזרה למעלה במובייל */
+            #scrollTopBtn { bottom: 20px; left: 20px; width: 45px; height: 45px; line-height: 45px; }
+            
+            /* התאמת סרגל סושיאל במובייל - נשאר צף מימין אך קטן יותר */
+            .social-sidebar a { padding: 10px; width: 45px; height: 45px; font-size: 1.2rem; }
+        }
+    </style>
 </head>
-
 <body>
-  <header class="top">
-    <div class="wrap navIn">
-      <a class="brand" href="./index.html" aria-label="דף הבית">
-        <span class="mark" aria-hidden="true"><img src="./assets/logo.svg" alt="" /></span>
-        <span class="btxt">
-          <b>Landing.Team</b>
-          <span>אתרי מכירה פרימיום לעסקים קטנים</span>
-        </span>
-      </a>
 
-      <nav class="nav" aria-label="תפריט">
-        <a class="active" href="./index.html">דף בית</a>
-        <a href="./demos.html">דוגמאות</a>
-        <a href="./pricing.html">מחירים</a>
-        <a href="./contact.html">צרו קשר</a>
-      </nav>
+    <button onclick="topFunction()" id="scrollTopBtn" title="חזרה למעלה">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-      <div class="actions">
-        <button class="btn ghost" type="button" data-theme-toggle aria-label="מצב תצוגה">🌙</button>
-        <a class="btn primary" href="./contact.html">קבל הצעה</a>
-      </div>
+    <div class="social-sidebar">
+        <a href="https://wa.me/972500000000" class="whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/yourprofile" class="instagram" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/yourprofile" class="facebook" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
     </div>
-  </header>
 
-  <main>
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF9F1C;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#FF5F1F;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" stroke="url(#grad1)" stroke-width="5" fill="none" />
+                    <path d="M35 30 V70 H65" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M65 30 H35 M50 30 V70" stroke="url(#grad1)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                </svg>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#pricing">מחירים</a></li>
+                    <li><a href="#portfolio">דוגמאות</a></li>
+                    <li><a href="#contact" class="nav-cta">צרו קשר</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <section class="hero">
-      <div class="wrap heroGrid">
-        <div class="heroCopy reveal">
-          <div class="strap">⚡ מהיר · רספונסיבי · <b>מוכר</b> · עם לידים מסודרים</div>
-          <h1>
-            אתר שנראה <span class="grad">גדול</span> 
-            ומביא פניות 
-            לעסק שלך
-          </h1>
-          <p class="lead">
-            אנחנו בונים אתרי מכירה ודפי נחיתה ברמה גבוהה, מותאמים למובייל, עם כפתורי WhatsApp/טלפון שמושכים לקוחות.
-            בלי מערכות כבדות ובלי כאב ראש.
-          </p>
-
-          <div class="ctaRow">
-            <a class="btn primary" href="./demos.html">צפה בדוגמאות</a>
-            <a class="btn" href="./pricing.html">ראה מחירים</a>
-            <a class="btn" data-wa href="#">WhatsApp לשיחה</a>
-          </div>
-
-          <div class="proofRow">
-            <div class="stat">
-              <div class="num" data-counter data-to="4" data-suffix="">0</div>
-              <div class="lbl">דמואים חיים</div>
+        <div class="hero-content">
+            <h1>אנחנו בונים דפי נחיתה שפשוט <span>ממירים יותר.</span></h1>
+            <p class="subtitle">
+                עיצוב ברמת פרימיום, קופירייטינג שמוכר, וטכנולוגיה שמשאירה את המתחרים מאחור.
+                הגיע הזמן להפוך את התנועה שלך ללקוחות משלמים.
+            </p>
+            <div style="margin-bottom: 60px;">
+                <a href="#contact" class="btn btn-primary" style="width: auto;">אני רוצה דף ממיר</a>
+                <a href="#portfolio" class="btn btn-outline" style="margin-right: 20px; width: auto;">לראות עבודות</a>
             </div>
-            <div class="stat">
-              <div class="num" data-counter data-to="1.2" data-suffix="ש׳">0</div>
-              <div class="lbl">טעינה ממוצעת (יעד)</div>
-            </div>
-            <div class="stat">
-              <div class="num" data-counter data-to="99" data-suffix="%">0</div>
-              <div class="lbl">מובייל קודם</div>
-            </div>
-          </div>
 
-          <p class="hint">
-            לא צריך לדעת מונחים. אם תראה מילה מקצועית, עצור עליה עם העכבר ותקבל הסבר.
-            למשל: <span class="term" tabindex="0" data-tip="CTA = קריאה לפעולה: הכפתור שמוביל את הלקוח להתקשר/לשלוח WhatsApp/להשאיר פרטים.">CTA</span>.
-          </p>
+            <div class="stats-container" id="stats-section">
+                <div class="stat-box">
+                    <span class="counter" data-target="10">0</span>
+                    <span class="stat-label">שנות ניסיון +</span>
+                </div>
+                <div class="stat-box">
+                    <span class="counter" data-target="700">0</span>
+                    <span class="stat-label">פרויקטים שנבנו +</span>
+                </div>
+                <div class="stat-box">
+                    <span class="counter" data-target="98">0</span>
+                    <span class="stat-label">אחוזי שביעות רצון %</span>
+                </div>
+            </div>
         </div>
-
-        <div class="heroShow reveal" aria-label="תצוגת פרימיום">
-          <div class="glass">
-            <div class="glassTop">
-              <span class="dot" aria-hidden="true"></span>
-              <span class="small">Preview</span>
-              <span class="pill">Premium UI</span>
-            </div>
-            <div class="glassBody">
-              <div class="phone">
-                <div class="phoneBar"></div>
-                <div class="phoneBody">
-                  <div class="chipMini"></div>
-                  <div class="line w"></div>
-                  <div class="line m"></div>
-                  <div class="btnMini"></div>
-                  <div class="line s"></div>
-                  <div class="gridMini">
-                    <div class="mini"></div>
-                    <div class="mini"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="stack">
-                <div class="tileUI">
-                  <div class="tTop"><b>כפתורי פעולה</b><span class="tag">WhatsApp · טלפון</span></div>
-                  <p>במובייל הכפתור תמיד מול העין, בלי לחפש.</p>
-                </div>
-                <div class="tileUI">
-                  <div class="tTop"><b>אמינות</b><span class="tag">ביקורות · שנים</span></div>
-                  <p>הגולש צריך להרגיש בטוח לפני שהוא מתקשר.</p>
-                </div>
-                <div class="tileUI">
-                  <div class="tTop"><b>מראה פרימיום</b><span class="tag">UX/UI</span></div>
-                  <p>התחושה של מותג מעלה סגירות. זה משחק פסיכולוגי.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="secHead">
-          <h2>מה מקבלים בפועל</h2>
-          <p>בלי מילים גבוהות. פשוט דברים שמכניסים לקוחות.</p>
+    <section id="portfolio" class="portfolio-section">
+        <div class="section-header">
+            <h2>דוגמאות <span>מהשטח</span></h2>
+            <p>אל תאמינו למילים שלנו. תראו את התוצאות. רפליקות חיות של דפים שבנינו.</p>
         </div>
 
-        <div class="featureGrid">
-          <button class="featureCard reveal" type="button" data-explain
-            data-title="הלקוח לוחץ מיד"
-            data-sub="כפתורי WhatsApp / טלפון"
-            data-desc="במובייל רוב הלידים מגיעים מלחיצה אחת. לכן אנחנו בונים כפתורי פעולה גדולים וברורים, עם טקסט שמניע לפעולה.">
-            <div class="fcTop">
-              <span class="badge blue"></span>
-              <b>פעולה בלחיצה</b>
-              <span class="mut">מובייל קודם</span>
-            </div>
-            <p>לא שולחים את הגולש לחפש. הוא פונה אליך.</p>
-          </button>
-
-          <button class="featureCard reveal" type="button" data-explain
-            data-title="האתר נראה יוקרתי"
-            data-sub="UX/UI שמרגיש מותג"
-            data-desc="אנימציות עדינות, היררכיה, ריווח, טיפוגרפיה. זה גורם ללקוח להרגיש שהוא בידיים טובות, ואז הוא יוצר קשר.">
-            <div class="fcTop">
-              <span class="badge pink"></span>
-              <b>נראות פרימיום</b>
-              <span class="mut">בלי רעש</span>
-            </div>
-            <p>מראה נקי ומודרני שגורם לאמון.</p>
-          </button>
-
-          <button class="featureCard reveal" type="button" data-explain
-            data-title="לידים מסודרים"
-            data-sub="Formspree + מייל"
-            data-desc="כל פניה נכנסת גם למערכת וגם למייל. אתה רואה את הפרטים מיד, ויכול להגיב מהר ולסגור לפני שהמתחרה עונה.">
-            <div class="fcTop">
-              <span class="badge teal"></span>
-              <b>מעקב לידים</b>
-              <span class="mut">שקט בראש</span>
-            </div>
-            <p>לא מפספס פניות, לא מתבלבל בין לקוחות.</p>
-          </button>
-
-          <button class="featureCard reveal" type="button" data-explain
-            data-title="סקיילינג"
-            data-sub="סאב-דומיין לכל לקוח"
-            data-desc="כל לקוח מקבל כתובת משלו, פרויקט משלו, וקוד משלו. אין זליגה בין אתרים. זה מודל שאפשר לגדל ל-100 לקוחות.">
-            <div class="fcTop">
-              <span class="badge gold"></span>
-              <b>מוכן לגדול</b>
-              <span class="mut">מסודר</span>
-            </div>
-            <p>אתה יכול למכור בראש שקט.</p>
-          </button>
+        <div class="portfolio-grid">
+            <a href="https://trainer.landing.team" target="_blank" class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="portfolio-overlay">
+                    <h3>מאמני כושר וספורט</h3>
+                    <div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div>
+                </div>
+            </a>
+             <a href="https://cosmetics.landing.team" target="_blank" class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="portfolio-overlay">
+                    <h3>קוסמטיקה וביוטי</h3>
+                    <div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div>
+                </div>
+            </a>
+             <a href="https://plumber.landing.team" target="_blank" class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="portfolio-overlay">
+                    <h3>שרברבים ובעלי מקצוע</h3>
+                    <div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div>
+                </div>
+            </a>
+             <a href="https://barber.landing.team" target="_blank" class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="portfolio-overlay">
+                    <h3>מספרות וברברשופ</h3>
+                    <div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div>
+                </div>
+            </a>
         </div>
-
-        <div class="explainBox card reveal" id="explainBox" aria-live="polite">
-          <div class="exTop">
-            <b>הסבר מהיר</b>
-            <span class="pill">עבור/לחץ על אחד הכרטיסים</span>
-          </div>
-          <div class="exBody">
-            <div>
-              <h3 id="exTitle">בחר כרטיס</h3>
-              <div class="sub" id="exSub">כאן יופיע פירוט קצר</div>
-            </div>
-            <p id="exDesc">ככל שהאתר מסביר יותר ברור ומוביל לפעולה, ככה הוא מביא יותר פניות. בלי חפירות.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="section soft">
-      <div class="wrap">
-        <div class="secHead">
-          <h2>ממליצים</h2>
-          <p>דוגמאות טקסט מוכנות (כשתתחיל לקבל המלצות אמיתיות נחליף).</p>
+    <section id="pricing">
+        <div class="section-header">
+            <h2>חבילות <span>מחיר</span></h2>
+            <p>שקיפות מלאה. בחרו את החבילה שמתאימה לכם ותתחילו לקבל לידים.</p>
         </div>
+        <div class="pricing-grid">
+            
+            <div class="price-card">
+                <div class="price-header">
+                    <h3>STARTER</h3>
+                    <div class="price">₪990</div>
+                    <div style="color: #94A3B8; margin-bottom: 20px;">דף נחיתה בסיסי</div>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> עיצוב נקי ורספונסיבי</li>
+                    <li><i class="fas fa-check-circle"></i> טופס השארת פרטים</li>
+                    <li><i class="fas fa-check-circle"></i> חיבור לדומיין</li>
+                    <li class="disabled"><i class="fas fa-times-circle"></i> קופירייטינג שיווקי</li>
+                    <li class="disabled"><i class="fas fa-times-circle"></i> אוטומציות מתקדמות</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline">אני רוצה את זה</a>
+            </div>
 
-        <div class="testFloat reveal" aria-label="ממליצים">
-          <div class="tCard">
-            <div class="tHead"><b>"נראה מיליון דולר"</b><span class="stars">★★★★★</span></div>
-            <p>האתר נראה מותג, ובמובייל הכל ברור. הוואטסאפ התחיל להביא פניות מהר.</p>
-            <div class="who">בעל עסק · מרכז</div>
-          </div>
-          <div class="tCard">
-            <div class="tHead"><b>"תוך יום זה היה באוויר"</b><span class="stars">★★★★★</span></div>
-            <p>בלי מערכות כבדות. קיבלתי דף שנראה פרימיום, ומשם השיווק פשוט עובד.</p>
-            <div class="who">עצמאית · שירותים</div>
-          </div>
-          <div class="tCard">
-            <div class="tHead"><b>"הלקוחות לא מתבלבלים"</b><span class="stars">★★★★★</span></div>
-            <p>הכול מסביר ברור, יש פעולה אחת נכונה, והלקוח מגיע עם כוונה.</p>
-            <div class="who">מאמן · כושר</div>
-          </div>
-        </div>
+            <div class="price-card popular">
+                <div class="popular-badge">הכי מומלץ</div>
+                <div class="price-header">
+                    <h3>BUSINESS</h3>
+                    <div class="price">₪1,890</div>
+                    <div style="color: #94A3B8; margin-bottom: 20px;">דף נחיתה ממיר + תוכן</div>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>עיצוב פרימיום יוקרתי</strong></li>
+                    <li><i class="fas fa-check-circle"></i> כתיבת תוכן שיווקי (קופי)</li>
+                    <li><i class="fas fa-check-circle"></i> חיבור למייל / וואטסאפ</li>
+                    <li><i class="fas fa-check-circle"></i> אחסון לשנה מתנה</li>
+                    <li class="disabled"><i class="fas fa-times-circle"></i> מערכת CRM מלאה</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">הבחירה של הלקוחות</a>
+            </div>
 
-        <div class="center reveal" style="margin-top:14px;">
-          <a class="btn primary" href="./contact.html">בוא נבנה לך אתר כזה</a>
+            <div class="price-card">
+                <div class="price-header">
+                    <h3>PRO 360</h3>
+                    <div class="price">₪3,290</div>
+                    <div style="color: #94A3B8; margin-bottom: 20px;">המעטפת המלאה לעסקים</div>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> כל מה שבחבילת Business</li>
+                    <li><i class="fas fa-check-circle"></i> אוטומציות (Zapier/Make)</li>
+                    <li><i class="fas fa-check-circle"></i> דף תודה מעוצב</li>
+                    <li><i class="fas fa-check-circle"></i> אופטימיזציה למהירות שיא</li>
+                    <li><i class="fas fa-check-circle"></i> חיבור לפיקסלים של פייסבוק/גוגל</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline">לקחת את זה לקצה</a>
+            </div>
+
         </div>
-      </div>
     </section>
 
-    <footer class="footer">
-      <div class="wrap footIn">
-        <div class="footBrand">
-          <div class="brandMark mono" aria-label="Landing.Team">LT</div>
-          <div>
-            <b>Landing.Team</b>
-            <div class="mut">© <span data-year></span> כל הזכויות שמורות</div>
-          </div>
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <h2>בואו נדבר <span>תכלס</span></h2>
+            <p>מוכנים לשדרג את הנוכחות הדיגיטלית שלכם? השאירו פרטים ונחזור אליכם לשיחת ייעוץ ללא התחייבות.</p>
         </div>
-        <div class="footLinks">
-          <a href="./demos.html">דוגמאות</a>
-          <a href="./pricing.html">מחירים</a>
-          <a href="./contact.html">צרו קשר</a>
+        
+        <div class="contact-container">
+            <form action="https://formspree.io/f/xqeezyge" method="POST" class="form-grid">
+                <div class="form-group">
+                    <label for="name">שם מלא</label>
+                    <input type="text" id="name" name="name" class="form-input" required placeholder="ישראל ישראלי">
+                </div>
+                <div class="form-group">
+                    <label for="phone">טלפון</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" required placeholder="050-0000000">
+                </div>
+                <div class="form-group full-width">
+                    <label for="email">אימייל</label>
+                    <input type="email" id="email" name="_replyto" class="form-input" required placeholder="your@email.com">
+                </div>
+                <div class="form-group full-width">
+                    <label for="message">ספרו לנו קצת על הפרויקט (ואיזו חבילה מעניינת אתכם)</label>
+                    <textarea id="message" name="message" class="form-input" placeholder="היי, אשמח לשמוע פרטים על חבילת ה-Business..."></textarea>
+                </div>
+                <div class="form-group full-width" style="text-align: center; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style="padding: 15px 60px; font-size: 1.2rem; width: auto;">שליחת פרטים</button>
+                </div>
+            </form>
         </div>
-      </div>
+    </section>
+
+    <footer>
+        <p>© 2024 כל הזכויות שמורות ל-<strong>Landing.team</strong> | נבנה בסטנדרט הגבוה ביותר.</p>
     </footer>
 
-    <a class="fab" data-wa href="#" aria-label="WhatsApp">
-      <span class="fabIco">💬</span>
-      <span class="fabTxt">WhatsApp</span>
-    </a>
-  </main>
+    <script>
+        // Sticky Header Script
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
-  <script src="./assets/app.js" defer></script>
-  <div class="socialDock" aria-label="Social">
-    <a class="socialBtn" href="contact.html" title="WhatsApp" aria-label="WhatsApp">WA</a>
-    <a class="socialBtn" href="#" title="Instagram" aria-label="Instagram">IG</a>
-    <a class="socialBtn" href="#" title="Facebook" aria-label="Facebook">f</a>
-  </div>
+        // Scroll To Top Script
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.onscroll = function() {
+            scrollFunction();
+            // גם הקוד של ההדר נמצא כאן (בנפרד למעלה) אבל הוספנו את הפונקציה הזו
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Animated Counters Script
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        let options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        observer.observe(document.getElementById('stats-section'));
+
+    </script>
 </body>
 </html>
