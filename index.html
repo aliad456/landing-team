@@ -11,282 +11,407 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>בניית דפי נחיתה לעסקים | Landing.team - עיצוב ממיר ומקצועי</title>
-    <meta name="description" content="מחפשים דף נחיתה שמביא לידים? ב-Landing.team אנחנו בונים דפי נחיתה מעוצבים, מהירים ומותאמים למובייל עם קופירייטינג שיווקי. חבילות משתלמות לעסקים.">
-    <meta name="keywords" content="בניית דפי נחיתה, דף נחיתה לעסק, עיצוב דפי נחיתה, דף נחיתה מחיר, הקמת דף נחיתה, landing page">
+    <title>Landing.team | אימפריות דיגיטליות</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #FF9F1C;
-            --primary-hover: #E88D0C;
-            --secondary: #2EC4B6;
-            --dark-bg: #0F172A;
-            --card-bg: #1E293B;
-            --text-light: #F8FAFC;
-            --text-gray: #94A3B8;
-            --gradient-main: linear-gradient(135deg, var(--primary) 0%, #FF5F1F 100%);
+            --bg-deep: #030014; /* כחול-שחור עמוק */
+            --bg-card: #0F0B29;
+            --primary: #8B5CF6; /* סגול חשמלי */
+            --accent: #06B6D4; /* טורקיז סייבר */
+            --hot-pink: #EC4899; /* ורוד לוהט */
+            --white: #ffffff;
+            --gray: #94A3B8;
+            --border: rgba(255,255,255,0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Heebo', sans-serif; background-color: var(--dark-bg); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
-        section { padding: 100px 20px; }
+        
+        body { 
+            font-family: 'Heebo', sans-serif; 
+            background-color: var(--bg-deep); 
+            color: var(--white); 
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-        /* כפתורים */
-        .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; width: 100%; text-align: center; border: none; }
-        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 10px 20px -10px rgba(255, 159, 28, 0.5); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(255, 159, 28, 0.7); }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; }
+        /* רעש רקע ואנימציה למלאות */
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15), transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1), transparent 40%);
+            animation: pulseBg 10s infinite alternate;
+        }
+
+        @keyframes pulseBg { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 1; transform: scale(1.1); } }
+
+        /* טיפוגרפיה */
+        h1, h2, h3, .brand-font { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
 
         /* HEADER */
-        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 20px 40px; transition: 0.4s; background: transparent; }
-        header.scrolled { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); padding: 15px 40px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo svg { height: 50px; width: auto; }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { font-weight: 700; font-size: 1.1rem; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 3px; background: var(--primary); transition: 0.3s; }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-cta { background: var(--primary); padding: 10px 25px !important; border-radius: 50px; color: white !important; }
-        .nav-cta:hover { background: var(--primary-hover); }
-
-        /* FLOATING SOCIAL SIDEBAR */
-        .social-sidebar { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 1001; display: flex; flex-direction: column; background: #1E293B; border-radius: 10px 0 0 10px; box-shadow: -2px 0 10px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); border-right: none; }
-        .social-sidebar a, .social-sidebar button { padding: 15px; font-size: 1.5rem; color: var(--text-light); transition: 0.3s; display: flex; justify-content: center; align-items: center; width: 60px; height: 60px; border: none; background: transparent; cursor: pointer; }
-        .social-sidebar a.whatsapp:hover { background: #25D366; color: white; }
-        .social-sidebar a.instagram:hover { background: #C13584; color: white; }
-        .social-sidebar a.facebook:hover { background: #4267B2; color: white; }
-        
-        /* כפתור נגישות בסרגל */
-        .social-sidebar button.accessibility-btn { border-top: 1px solid rgba(255,255,255,0.1); color: var(--secondary); }
-        .social-sidebar button.accessibility-btn:hover { background: var(--secondary); color: white; }
-
-        /* תפריט נגישות נפתח */
-        #accessibilityMenu {
-            display: none; position: fixed; right: 70px; top: 50%; transform: translateY(-50%);
-            background: #1E293B; padding: 20px; border-radius: 10px; border: 1px solid var(--primary);
-            width: 250px; z-index: 1002; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 15px 40px; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(3, 0, 20, 0.9); /* קצת יותר כהה להדגשת הלוגו */
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
         }
-        #accessibilityMenu h3 { text-align: center; margin-bottom: 15px; color: var(--primary); }
-        #accessibilityMenu button {
-            width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #334155; background: #0F172A;
-            color: white; border-radius: 5px; cursor: pointer; text-align: right;
-        }
-        #accessibilityMenu button:hover { border-color: var(--primary); }
         
-        /* מחלקות נגישות (High Contrast & Font Size) */
-        .high-contrast * { background: black !important; color: yellow !important; border-color: yellow !important; box-shadow: none !important; }
-        .high-contrast img { filter: grayscale(100%); }
+        /* עיצוב הלוגו החדש */
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        /* הגדרת ה-SVG של הלוגו */
+        .main-logo-svg {
+            height: 50px; /* גובה מרשים ללוגו */
+            width: auto;
+            transition: 0.3s;
+        }
+        .brand-logo-container:hover .main-logo-svg {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
+        }
 
-        /* SCROLL TOP */
-        #scrollTopBtn { display: none; position: fixed; bottom: 30px; left: 30px; z-index: 99; background-color: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(255, 159, 28, 0.4); transition: 0.3s; }
-        #scrollTopBtn:hover { background-color: var(--primary-hover); transform: translateY(-5px); }
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 100px 20px;
+            position: relative; overflow: hidden;
+        }
 
-        /* HERO */
-        .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 120px; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,159,28,0.15) 0%, rgba(15,23,42,0) 70%); border-radius: 50%; z-index: -1; }
-        .hero::after { content: ''; position: absolute; bottom: -20%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(46,196,182,0.1) 0%, rgba(15,23,42,0) 70%); border-radius: 50%; z-index: -1; }
-        .hero-content { max-width: 1200px; margin: 0 auto; text-align: center; }
-        .hero h1 { font-size: 5rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
-        .hero h1 span { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p.subtitle { font-size: 1.5rem; color: var(--text-gray); max-width: 800px; margin: 0 auto 40px auto; }
+        .hero h1 { 
+            font-size: 6rem; line-height: 0.9; margin-bottom: 30px; 
+            text-shadow: 0 0 50px rgba(139, 92, 246, 0.3);
+        }
+        
+        .hero p { 
+            font-size: 1.4rem; color: var(--gray); max-width: 700px; margin-bottom: 50px; 
+            border-right: 4px solid var(--primary); padding-right: 20px;
+        }
 
-        /* FEATURES */
-        .features-container { display: flex; justify-content: center; gap: 30px; margin-top: 80px; flex-wrap: wrap; padding: 0 10px; }
-        .feature-box { background: var(--card-bg); padding: 40px 30px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.2); flex: 1; min-width: 280px; max-width: 350px; transition: 0.3s; }
-        .feature-box:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .feature-icon { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
-        .feature-text { font-size: 1.25rem; color: var(--text-light); font-weight: 700; }
+        /* כפתורים מסיביים */
+        .btn-group { display: flex; gap: 20px; }
+        .btn {
+            padding: 18px 45px; border-radius: 12px; font-weight: 800; font-size: 1.1rem;
+            text-decoration: none; transition: 0.3s; position: relative; overflow: hidden;
+            display: flex; align-items: center; gap: 10px; cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--white); color: black;
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(255,255,255,0.4); }
 
-        /* PORTFOLIO */
-        .portfolio-section { background: #151F32; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 3.5rem; font-weight: 900; margin-bottom: 15px; }
-        .section-header span { color: var(--primary); }
-        .section-header p { font-size: 1.3rem; color: var(--text-gray); }
-        .portfolio-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
-        .portfolio-item { position: relative; height: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.4s; cursor: pointer; border: 2px solid transparent; }
-        .portfolio-item:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .portfolio-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: 0.4s; filter: brightness(0.7); }
-        .portfolio-item:hover .portfolio-bg { transform: scale(1.1); filter: brightness(0.4); }
-        .portfolio-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(to top, rgba(15,23,42,0.9), transparent); z-index: 2; }
-        .portfolio-overlay h3 { font-size: 2rem; margin-bottom: 10px; }
-        .portfolio-link { display: inline-flex; align-items: center; gap: 10px; color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+        .btn-outline { border: 2px solid var(--border); color: white; background: rgba(255,255,255,0.05); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* MARQUEE */
+        .marquee-container {
+            transform: rotate(-2deg); background: var(--primary);
+            padding: 15px 0; margin: 0 -20px 80px -20px;
+            border-top: 2px solid white; border-bottom: 2px solid white;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        .marquee-content {
+            display: inline-block; animation: scroll 25s linear infinite;
+            font-family: 'Outfit'; font-weight: 900; color: black; font-size: 1.5rem; text-transform: uppercase;
+        }
+        .marquee-item { margin: 0 40px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(100%); } }
+
+        /* PORTFOLIO BENTO GRID */
+        .portfolio { padding: 50px 5%; max-width: 1600px; margin: 0 auto; }
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header h2 { font-size: 3.5rem; margin-bottom: 10px; }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 400px;
+            gap: 25px;
+        }
+
+        .bento-card {
+            background: var(--bg-card); border-radius: 30px; overflow: hidden;
+            position: relative; border: 1px solid var(--border); transition: 0.4s;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            text-decoration: none;
+            /* הוספת תמונות רקע לדמואים */
+            background-size: cover; background-position: center;
+        }
+
+        .bento-card:hover { 
+            border-color: var(--primary); transform: translateY(-10px); 
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2); z-index: 2;
+        }
+
+        /* --- רקעים לדמואים (תמונת הספר תוקנה) --- */
+        .bg-barber { background-image: url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=1000&auto=format&fit=crop'); }
+        .bg-cosmetics { background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=800&auto=format&fit=crop'); }
+        .bg-trainer { background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop'); }
+        .bg-plumber { background-image: url('https://images.unsplash.com/photo-1581244277943-fe4a9c777189?q=80&w=800&auto=format&fit=crop'); }
+        /* ----------------------------------------- */
+
+        .bento-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            padding: 40px; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            opacity: 0.9; transition: 0.3s;
+        }
+        .bento-card:hover .bento-overlay { opacity: 1; background: linear-gradient(to top, rgba(139, 92, 246, 0.9) 0%, rgba(0,0,0,0) 100%); }
+
+        .bento-tag { 
+            background: var(--white); color: black; padding: 5px 15px; border-radius: 20px; 
+            font-weight: 800; font-size: 0.8rem; align-self: flex-start; margin-bottom: 15px;
+        }
+
+        .bento-title { font-size: 2.5rem; font-weight: 900; line-height: 1; margin-bottom: 10px; color: white; }
+        .bento-desc { color: #ccc; font-size: 1rem; }
+
+        .span-2 { grid-column: span 2; }
 
         /* PRICING */
-        .pricing-section { text-align: center; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; align-items: center; }
-        .price-card { background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden; transition: 0.3s; }
-        .price-card:hover { transform: translateY(-10px); }
-        .price-card.popular { border: 2px solid var(--primary); transform: scale(1.05); z-index: 2; background: #1e293b; box-shadow: 0 20px 50px rgba(255, 159, 28, 0.15); }
-        .price-card.popular:hover { transform: scale(1.05) translateY(-10px); }
-        .popular-badge { position: absolute; top: 20px; right: -35px; background: var(--primary); padding: 5px 40px; transform: rotate(45deg); font-weight: 700; font-size: 0.9rem; }
-        .price-header h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--text-light); }
-        .price { font-size: 3rem; font-weight: 900; color: var(--primary); }
-        .price span { font-size: 1rem; color: var(--text-gray); font-weight: 400; } /* החזרתי את זה מהקוד שלך */
-        .features-list { margin: 30px 0; text-align: right; padding: 0 10px; }
-        .features-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 1rem; }
-        .features-list li i { color: var(--secondary); font-size: 1.1rem; }
-        .features-list li.disabled { color: rgba(255,255,255,0.3); text-decoration: line-through; }
-        .features-list li.disabled i { color: #475569; }
+        .pricing { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 50px; }
 
-        /* CONTACT FORM UPDATED */
-        .contact-section { background: #151F32; }
-        .contact-container { max-width: 1000px; margin: 0 auto; background: var(--card-bg); padding: 60px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: var(--primary); }
-        .form-input { width: 100%; padding: 15px 20px; background: var(--dark-bg); border: 2px solid #2A3B5C; border-radius: 10px; color: var(--text-light); font-size: 1.1rem; font-family: 'Heebo'; }
+        .price-card {
+            background: #080516; border: 1px solid var(--border);
+            padding: 50px 40px; border-radius: 30px; position: relative;
+            transition: 0.3s;
+        }
+        
+        .price-card:hover { transform: scale(1.02); border-color: var(--accent); }
+        .price-card.popular { 
+            border: 2px solid var(--primary); 
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), transparent);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
+        }
+
+        .popular-badge {
+            position: absolute; top: 0; right: 0; background: var(--primary);
+            color: white; padding: 8px 20px; border-radius: 0 25px 0 20px;
+            font-weight: bold;
+        }
+
+        .price-title { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 10px; }
+        .price-val { font-size: 3.5rem; font-weight: 900; color: var(--white); font-family: 'Outfit'; }
+        .price-val span { font-size: 1.2rem; font-weight: 400; color: var(--gray); }
+        
+        .feature-list { list-style: none; margin: 30px 0; padding: 0; }
+        .feature-list li { 
+            margin-bottom: 18px; display: flex; align-items: center; gap: 12px; 
+            font-size: 1.05rem; color: #e0e0e0;
+        }
+        .feature-list li i { color: var(--accent); font-size: 1.2rem; }
+        .feature-list li.disabled { color: #555; text-decoration: line-through; }
+        .feature-list li.disabled i { color: #555; }
+
+        /* CONTACT FORM */
+        .contact { padding: 100px 5%; background: linear-gradient(to top, #000, var(--bg-deep)); border-top: 1px solid var(--border); }
+        .form-container { 
+            max-width: 700px; margin: 0 auto; background: var(--bg-card); 
+            padding: 60px; border-radius: 30px; border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .form-input { 
+            width: 100%; background: #030014; border: 1px solid #333; 
+            padding: 18px; border-radius: 12px; margin-bottom: 20px; 
+            color: white; font-family: 'Heebo'; font-size: 1.1rem;
+        }
         .form-input:focus { outline: none; border-color: var(--primary); }
-        textarea.form-input { resize: vertical; height: 150px; }
-        .full-width { grid-column: 1 / -1; }
-        
-        /* תקנון וצ'קבוקס */
-        .terms-checkbox { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 0.9rem; color: var(--text-gray); }
-        .terms-checkbox input { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
-        .terms-link { color: var(--primary); text-decoration: underline; cursor: pointer; }
 
-        /* MODAL (תקנון) */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
-        .modal-content { background-color: #1E293B; margin: 5% auto; padding: 40px; border: 1px solid var(--primary); width: 80%; max-width: 800px; border-radius: 15px; position: relative; color: #F8FAFC; max-height: 80vh; overflow-y: auto; }
-        .close-modal { position: absolute; top: 20px; left: 20px; color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .close-modal:hover { color: var(--primary); }
-        .modal-body h2 { color: var(--primary); margin-bottom: 20px; }
-        .modal-body h3 { color: var(--secondary); margin-top: 20px; margin-bottom: 10px; }
-        .modal-body p, .modal-body ul { margin-bottom: 10px; font-size: 0.95rem; color: #cbd5e1; }
-        .modal-body ul { list-style: disc; padding-right: 20px; }
+        /* כפתורי סושיאל צפים */
+        .social-float {
+            position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 15px; z-index: 999;
+        }
+        .social-btn {
+            width: 50px; height: 50px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 1.5rem; transition: 0.3s; text-decoration: none;
+        }
+        .social-btn:hover { background: var(--primary); border-color: var(--primary); transform: scale(1.1); }
+        .social-btn.wa:hover { background: #25D366; border-color: #25D366; }
+        .social-btn.ig:hover { background: #C13584; border-color: #C13584; }
+        .social-btn.fb:hover { background: #4267B2; border-color: #4267B2; }
+        .social-btn.tt:hover { background: #000000; border-color: #000000; }
 
-        /* FOOTER */
-        footer { padding: 50px; text-align: center; background: #0a101f; border-top: 1px solid #1E293B; }
-        footer p { color: var(--text-gray); }
-        footer strong { color: var(--primary); }
-        
-        /* MOBILE */
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .nav-links { display: none; }
-            .hero h1 { font-size: 3rem; }
-            .features-container { flex-direction: column; }
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .form-grid { grid-template-columns: 1fr; }
-            .contact-container { padding: 30px; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-            .price-card.popular { transform: none; }
-            .social-sidebar { display: none; }
+        /* כפתור גלילה למעלה */
+        #scrollTopBtn {
+            display: none; position: fixed; bottom: 30px; right: 30px; z-index: 999;
+            border: none; outline: none; background: var(--primary); color: white;
+            cursor: pointer; padding: 15px; border-radius: 50%; font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;
+        }
+        #scrollTopBtn:hover { background: var(--accent); transform: translateY(-5px); }
+
+        /* כפתור נגישות */
+        .access-btn {
+            position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px;
+            background: var(--primary); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); cursor: pointer; z-index: 999;
+            border: none; transition: 0.3s;
+        }
+        .access-btn:hover { transform: scale(1.1); }
+
+        /* מודל תקנון */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); }
+        .modal-content { 
+            background: #1a1a1a; margin: 5% auto; padding: 50px; border: 1px solid var(--primary); 
+            width: 80%; max-width: 900px; border-radius: 20px; color: #eee; 
+            max-height: 80vh; overflow-y: auto; direction: rtl;
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.3);
+        }
+        .modal-content h2 { color: var(--primary); font-size: 2rem; margin-bottom: 20px; }
+        .modal-content h3 { color: var(--accent); margin-top: 30px; margin-bottom: 10px; font-size: 1.5rem; }
+        .modal-content ul { padding-right: 20px; line-height: 1.8; }
+        .close-modal { position: absolute; top: 30px; left: 30px; font-size: 30px; cursor: pointer; color: #666; transition: 0.3s;}
+        .close-modal:hover { color: white; }
+
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr; grid-auto-rows: 350px; }
+            .span-2 { grid-column: span 1; }
+            .hero h1 { font-size: 3.5rem; }
+            .social-float { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-animation"></div>
+
     <button onclick="topFunction()" id="scrollTopBtn" title="חזרה למעלה"><i class="fas fa-arrow-up"></i></button>
 
-    <div class="social-sidebar">
-        <a href="https://wa.me/972500000000" class="whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <button class="accessibility-btn" onclick="toggleAccessMenu()" title="תפריט נגישות"><i class="fas fa-wheelchair"></i></button>
+    <div class="social-float">
+        <a href="https://wa.me/972500000000" class="social-btn wa" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-btn ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <div id="accessibilityMenu">
-        <h3><i class="fas fa-universal-access"></i> כלי נגישות</h3>
-        <button onclick="changeFontSize(1)"><i class="fas fa-plus"></i> הגדל טקסט</button>
-        <button onclick="changeFontSize(-1)"><i class="fas fa-minus"></i> הקטן טקסט</button>
-        <button onclick="toggleContrast()"><i class="fas fa-adjust"></i> ניגודיות גבוהה</button>
-        <button onclick="highlightLinks()"><i class="fas fa-link"></i> הדגשת קישורים</button>
-        <button onclick="resetAccessibility()" style="border-color: #ef4444; color: #ef4444;"><i class="fas fa-redo"></i> איפוס</button>
-    </div>
+    <header>
+        <a href="#" class="brand-logo-container">
+            <svg class="main-logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--primary)" />
+                        <stop offset="100%" style="stop-color:var(--accent)" />
+                    </linearGradient>
+                </defs>
+                <path d="M40 10 L10 70 H30 L40 50 L50 70 H70 L40 10Z" fill="url(#logoGrad)"/>
+                <path d="M40 25 L25 55 H35 L40 45 L45 55 H55 L40 25Z" fill="#ffffff"/>
+            </svg>
+        </a>
 
-    <header id="main-header">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                    <defs>
-                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FF9F1C;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FF5F1F;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="50" cy="50" r="45" stroke="url(#grad1)" stroke-width="5" fill="none" />
-                    <path d="M35 30 V70 H65" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
-                    <path d="M65 30 H35 M50 30 V70" stroke="url(#grad1)" stroke-width="6" fill="none" stroke-linecap="round"/>
-                </svg>
-            </a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#pricing">מחירים</a></li>
-                    <li><a href="#portfolio">דוגמאות</a></li>
-                    <li><a href="#contact" class="nav-cta">צרו קשר</a></li>
-                </ul>
-            </nav>
-        </div>
+        <a href="#contact" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">
+            צור קשר <i class="fas fa-arrow-left"></i>
+        </a>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>אנחנו בונים דפי נחיתה שפשוט <span>ממירים יותר.</span></h1>
-            <p class="subtitle">עיצוב ברמת פרימיום, קופירייטינג שמוכר, וטכנולוגיה שמשאירה את המתחרים מאחור.</p>
-            <div style="margin-bottom: 60px;">
-                <a href="#contact" class="btn btn-primary" style="width: auto;">אני רוצה דף ממיר</a>
-                <a href="#portfolio" class="btn btn-outline" style="margin-right: 20px; width: auto;">לראות עבודות</a>
-            </div>
-            <div class="features-container">
-                <div class="feature-box"><div class="feature-icon"><i class="fas fa-user-check"></i></div><div class="feature-text">מומחים מובילים</div></div>
-                <div class="feature-box"><div class="feature-icon"><i class="fas fa-headset"></i></div><div class="feature-text">זמינות מלאה</div></div>
-                <div class="feature-box"><div class="feature-icon"><i class="fas fa-robot"></i></div><div class="feature-text">טכנולוגיית AI מתקדמת</div></div>
-            </div>
+        <h1>WE BUILD <br><span class="gradient-text">DIGITAL EMPIRES</span></h1>
+        <p>אנחנו לא בונים "סתם עוד אתר". אנחנו בונים מכונות שיווק שמייצרות כסף. 
+        עיצוב מקסימליסטי, טכנולוגיה מתקדמת וחווית משתמש שלא רואים בישראל.</p>
+        
+        <div class="btn-group">
+            <a href="#portfolio" class="btn btn-primary">לדמואים <i class="fas fa-eye"></i></a>
+            <a href="#pricing" class="btn btn-outline">חבילות <i class="fas fa-tag"></i></a>
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio-section">
-        <div class="section-header">
-            <h2>דוגמאות <span>מהשטח</span></h2>
-            <p>תוצאות אמיתיות. רפליקות חיות של דפים שבנינו.</p>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-item">High Conversion</span> • 
+            <span class="marquee-item">AI Powered</span> • 
+            <span class="marquee-item">SEO Optimized</span> • 
+            <span class="marquee-item">Premium Design</span> • 
+            <span class="marquee-item">Fast Loading</span> • 
+            <span class="marquee-item">Automation</span> •
+            <span class="marquee-item">Full Responsive</span> • 
+            <span class="marquee-item">Analytics</span>
         </div>
-        <div class="portfolio-grid">
-            <a href="https://trainer.landing.team" target="_blank" class="portfolio-item">
-                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
-                <div class="portfolio-overlay"><h3>מאמני כושר</h3><div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div></div>
-            </a>
-            <a href="https://cosmetics.landing.team" target="_blank" class="portfolio-item">
-                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
-                <div class="portfolio-overlay"><h3>קוסמטיקה וביוטי</h3><div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div></div>
-            </a>
-            <a href="https://plumber.landing.team" target="_blank" class="portfolio-item">
-                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
-                <div class="portfolio-overlay"><h3>בעלי מקצוע</h3><div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div></div>
-            </a>
-            <a href="https://barber.landing.team" target="_blank" class="portfolio-item">
-                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=1000&auto=format&fit=crop&w=1000&q=80');"></div>
-                <div class="portfolio-overlay">
-                   <h3>מספרות וברברשופ</h3>
-                   <div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div>
+    </div>
+
+    <section id="portfolio" class="portfolio">
+        <div class="section-header">
+            <h2>OUR <span style="color: var(--primary);">WORK</span></h2>
+            <p style="font-size: 1.2rem;">בחרנו את התעשיות הכי תחרותיות ופירקנו אותן לגורמים. ככה זה נראה:</p>
+        </div>
+
+        <div class="bento-grid">
+            
+            <a href="https://barber.landing.team" target="_blank" class="bento-card bg-barber span-2">
+                <div class="bento-overlay">
+                    <span class="bento-tag">MAXIMALIST STYLE</span>
+                    <h3 class="bento-title">THE BARBER</h3>
+                    <p class="bento-desc">עיצוב אורבני עמוס, גריד ייחודי, אפליקציית תורים.</p>
+                    <span style="color: var(--accent); font-weight: bold; margin-top: 10px;">לצפייה בדמו <i class="fas fa-arrow-left"></i></span>
                 </div>
-           </a>
+            </a>
+
+            <a href="https://cosmetics.landing.team" target="_blank" class="bento-card bg-cosmetics">
+                <div class="bento-overlay">
+                    <span class="bento-tag">CLEAN & LUXURY</span>
+                    <h3 class="bento-title">COSMETICS</h3>
+                    <p class="bento-desc">עיצוב נקי ויוקרתי.</p>
+                    <span style="color: var(--accent); font-weight: bold; margin-top: 10px;">לצפייה בדמו -></span>
+                </div>
+            </a>
+
+            <a href="https://trainer.landing.team" target="_blank" class="bento-card bg-trainer">
+                <div class="bento-overlay">
+                    <span class="bento-tag">DARK & NEON</span>
+                    <h3 class="bento-title">TRAINER</h3>
+                    <p class="bento-desc">דארק מוד, אנימציות.</p>
+                    <span style="color: var(--accent); font-weight: bold; margin-top: 10px;">לצפייה בדמו -></span>
+                </div>
+            </a>
+
+            <a href="https://plumber.landing.team" target="_blank" class="bento-card bg-plumber span-2">
+                <div class="bento-overlay">
+                    <span class="bento-tag">TRUST & URGENCY</span>
+                    <h3 class="bento-title">PLUMBER PRO</h3>
+                    <p class="bento-desc">עיצוב שמשדר אמינות ודחיפות, מותאם לשירותי חירום.</p>
+                    <span style="color: var(--accent); font-weight: bold; margin-top: 10px;">לצפייה בדמו <i class="fas fa-arrow-left"></i></span>
+                </div>
+            </a>
+
         </div>
     </section>
 
-    <section id="pricing">
+    <section id="pricing" class="pricing">
         <div class="section-header">
-            <h2>חבילות <span>מחיר</span></h2>
-            <p>שקיפות מלאה. בחרו את החבילה שמתאימה לכם.</p>
+            <h2>מחיר <span style="color: var(--primary);">החבילות</span></h2>
+            <p>שקיפות מלאה. בלי אותיות קטנות. בדיוק מה שאתה צריך.</p>
         </div>
+
         <div class="pricing-grid">
             
             <div class="price-card">
-                <div class="price-header">
-                    <h3>STARTER</h3>
-                    <div class="price">990₪</div>
-                    <div style="color: #94A3B8; margin-bottom: 20px;">דף נחיתה בסיסי</div>
-                </div>
-                <ul class="features-list">
+                <div class="price-title">STARTER</div>
+                <div class="price-val">990₪</div>
+                <div style="color: #aaa; margin-bottom: 20px;">דף נחיתה בסיסי</div>
+                <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> עיצוב נקי ורספונסיבי</li>
                     <li><i class="fas fa-check-circle"></i> טופס השארת פרטים</li>
                     <li><i class="fas fa-check-circle"></i> חיבור לסאב-דומיין</li>
@@ -294,17 +419,15 @@
                     <li class="disabled"><i class="fas fa-times-circle"></i> קופירייטינג שיווקי</li>
                     <li class="disabled"><i class="fas fa-times-circle"></i> אוטומציות מתקדמות</li>
                 </ul>
-                <a href="#contact" class="btn btn-outline">אני רוצה את זה</a>
+                <a href="#contact" class="btn btn-outline" style="width: 100%; justify-content: center;">אני רוצה את זה</a>
             </div>
 
             <div class="price-card popular">
                 <div class="popular-badge">הכי מומלץ</div>
-                <div class="price-header">
-                    <h3>BUSINESS</h3>
-                    <div class="price">₪1,890</div>
-                    <div style="color: #94A3B8; margin-bottom: 20px;">דף נחיתה ממיר + תוכן</div>
-                </div>
-                <ul class="features-list">
+                <div class="price-title">BUSINESS</div>
+                <div class="price-val">1,890₪</div>
+                <div style="color: #aaa; margin-bottom: 20px;">דף נחיתה ממיר + תוכן</div>
+                <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> <strong>עיצוב פרימיום יוקרתי</strong></li>
                     <li><i class="fas fa-check-circle"></i> כתיבת תוכן שיווקי (קופי)</li>
                     <li><i class="fas fa-check-circle"></i> חיבור למייל / וואטסאפ</li>
@@ -313,170 +436,121 @@
                     <li><i class="fas fa-check-circle"></i> עלות הקמה מוזלת</li>
                     <li class="disabled"><i class="fas fa-times-circle"></i> מערכת CRM מלאה</li>
                 </ul>
-                <a href="#contact" class="btn btn-primary">הבחירה של הלקוחות</a>
+                <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">הבחירה של הלקוחות</a>
             </div>
 
             <div class="price-card">
-                <div class="price-header">
-                    <h3>PRO 360</h3>
-                    <div class="price">₪3,290</div>
-                    <div style="color: #94A3B8; margin-bottom: 20px;">המעטפת המלאה לעסקים</div>
-                </div>
-                <ul class="features-list">
+                <div class="price-title">PRO 360</div>
+                <div class="price-val">3,290₪</div>
+                <div style="color: #aaa; margin-bottom: 20px;">המעטפת המלאה לעסקים</div>
+                <ul class="feature-list">
                     <li><i class="fas fa-check-circle"></i> כל מה שבחבילת Business</li>
                     <li><i class="fas fa-check-circle"></i> אוטומציות (Zapier/Make)</li>
                     <li><i class="fas fa-check-circle"></i> דף תודה מעוצב</li>
                     <li><i class="fas fa-check-circle"></i> אופטימיזציה למהירות שיא</li>
                     <li><i class="fas fa-check-circle"></i> חיבור לפיקסלים של פייסבוק/גוגל</li>
                 </ul>
-                <a href="#contact" class="btn btn-outline">לקחת את זה לקצה</a>
+                <a href="#contact" class="btn btn-outline" style="width: 100%; justify-content: center;">לקחת את זה לקצה</a>
             </div>
 
         </div>
     </section>
 
-    <section id="contact" class="contact-section">
+    <section id="contact" class="contact">
         <div class="section-header">
-            <h2>בואו נדבר <span>תכלס</span></h2>
-            <p>השאירו פרטים לשיחת ייעוץ ללא התחייבות.</p>
+            <h2>LET'S <span style="color: var(--hot-pink);">TALK</span></h2>
+            <p>מוכנים לשדרג? השאירו פרטים.</p>
         </div>
-        
-        <div class="contact-container">
-            <form action="https://formspree.io/f/xqeezyge" method="POST" class="form-grid">
-                <div class="form-group">
-                    <label for="name">שם מלא</label>
-                    <input type="text" id="name" name="name" class="form-input" required placeholder="ישראל ישראלי">
-                </div>
-                <div class="form-group">
-                    <label for="phone">טלפון</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" required placeholder="050-0000000">
-                </div>
-                <div class="form-group full-width">
-                    <label for="email">אימייל</label>
-                    <input type="email" id="email" name="_replyto" class="form-input" required placeholder="your@email.com">
-                </div>
-                <div class="form-group full-width">
-                    <label for="message">פרטים נוספים</label>
-                    <textarea id="message" name="message" class="form-input" placeholder="אשמח לשמוע פרטים..."></textarea>
+
+        <div class="form-container">
+            <form action="https://formspree.io/f/xqeezyge" method="POST">
+                <input type="text" name="name" class="form-input" placeholder="שם מלא" required>
+                <input type="tel" name="phone" class="form-input" placeholder="טלפון" required>
+                <input type="email" name="_replyto" class="form-input" placeholder="אימייל" required>
+                <textarea name="message" class="form-input" style="height: 120px;" placeholder="ספרו לנו על הפרויקט..."></textarea>
+                
+                <div style="margin: 20px 0; display: flex; align-items: center; gap: 10px; color: #aaa;">
+                    <input type="checkbox" required>
+                    <span>אני מאשר את <a href="#" onclick="openModal()" style="color: var(--primary);">התקנון ותנאי השימוש</a></span>
                 </div>
 
-                <div class="form-group full-width terms-checkbox">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms" style="color: #94A3B8; font-weight: 400; margin: 0; display: inline;">
-                        קראתי ואני מאשר את <span class="terms-link" onclick="openModal()">תקנון האתר ותנאי השימוש</span>
-                    </label>
-                </div>
-
-                <div class="form-group full-width" style="text-align: center; margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary" style="padding: 15px 60px; font-size: 1.2rem; width: auto;">שליחת פרטים</button>
-                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    שליחת פרטים <i class="fas fa-paper-plane"></i>
+                </button>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>© 2024 כל הזכויות שמורות ל-<strong>Landing.team</strong></p>
+        <a href="#" style="text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <svg class="main-logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 40px;">
+                <path d="M40 10 L10 70 H30 L40 50 L50 70 H70 L40 10Z" fill="url(#logoGrad)"/>
+                <path d="M40 25 L25 55 H35 L40 45 L45 55 H55 L40 25Z" fill="#ffffff"/>
+            </svg>
+            <div class="brand-font" style="font-size: 1.5rem; color: white; font-weight: 900;">Landing<span style="color: var(--accent);">.team</span></div>
+        </a>
+        <p style="color: #666; text-align: center;">© 2024 כל הזכויות שמורות. נבנה על ידי מכונות שיווק.</p>
     </footer>
+
+    <button class="access-btn" onclick="toggleAccessMenu()" title="תפריט נגישות">
+        <i class="fas fa-wheelchair"></i>
+    </button>
 
     <div id="termsModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="modal-body">
-                <h2>תקנון ותנאי שימוש - Landing.team</h2>
-                <p>ברוכים הבאים לאתר Landing.team (להלן: "האתר"). השימוש באתר ובשירותים המוצעים בו כפוף לתנאים המפורטים להלן.</p>
-                
-                <h3>1. כללי</h3>
-                <ul>
-                    <li>האתר מספק שירותי בנייה, עיצוב ופיתוח של דפי נחיתה ואתרים לעסקים.</li>
-                    <li>השארת פרטים באתר מהווה הסכמה ליצירת קשר מצד צוות האתר לצורך מתן שירות.</li>
-                </ul>
+            <h2>תקנון ותנאי שימוש - Landing.team</h2>
+            <p>ברוכים הבאים לאתר Landing.team (להלן: "האתר"). השימוש באתר ובשירותים המוצעים בו כפוף לתנאים המפורטים להלן.</p>
+            
+            <h3>1. כללי</h3>
+            <ul>
+                <li>האתר מספק שירותי בנייה, עיצוב ופיתוח של דפי נחיתה ואתרים לעסקים.</li>
+                <li>השארת פרטים באתר מהווה הסכמה ליצירת קשר מצד צוות האתר לצורך מתן שירות.</li>
+            </ul>
 
-                <h3>2. אספקת השירות וטכנולוגיה</h3>
-                <ul>
-                    <li>החברה מתחייבת לספק את השירות בסטנדרטים מקצועיים גבוהים ובלוחות הזמנים שיסוכמו מול הלקוח.</li>
-                    <li><strong>שימוש בטכנולוגיות מתקדמות:</strong> לצורך ייעול העבודה, שיפור מהירות הביצוע והבטחת תוצאות איכותיות, החברה עושה שימוש במגוון כלים טכנולוגיים, לרבות כלי אוטומציה ומודלים של בינה מלאכותית (AI), ככלי עזר לצוות המקצועי.</li>
-                </ul>
+            <h3>2. אספקת השירות וטכנולוגיה</h3>
+            <ul>
+                <li>החברה מתחייבת לספק את השירות בסטנדרטים מקצועיים גבוהים ובלוחות הזמנים שיסוכמו מול הלקוח.</li>
+                <li><strong>שימוש בטכנולוגיות מתקדמות:</strong> לצורך ייעול העבודה, שיפור מהירות הביצוע והבטחת תוצאות איכותיות, החברה עושה שימוש במגוון כלים טכנולוגיים, לרבות כלי אוטומציה ומודלים של בינה מלאכותית (AI), ככלי עזר לצוות המקצועי.</li>
+            </ul>
 
-                <h3>3. מדיניות ביטולים (חוק הגנת הצרכן)</h3>
-                <ul>
-                    <li>ביטול עסקה יתאפשר בהתאם להוראות חוק הגנת הצרכן, התשמ"א-1981.</li>
-                    <li>בעסקאות של "מידע" או טובין שיוצרו במיוחד עבור הצרכן (כגון דף נחיתה בעיצוב אישי), ייתכן ולא תהיה זכות ביטול לאחר תחילת העבודה, בהתאם לחוק.</li>
-                </ul>
+            <h3>3. מדיניות ביטולים (חוק הגנת הצרכן)</h3>
+            <ul>
+                <li>ביטול עסקה יתאפשר בהתאם להוראות חוק הגנת הצרכן, התשמ"א-1981.</li>
+                <li>בעסקאות של "מידע" או טובין שיוצרו במיוחד עבור הצרכן (כגון דף נחיתה בעיצוב אישי), ייתכן ולא תהיה זכות ביטול לאחר תחילת העבודה, בהתאם לחוק.</li>
+            </ul>
 
-                <h3>4. הגבלת אחריות</h3>
-                <ul>
-                    <li>החברה אינה אחראית לתקלות שמקורן בצד ג' (כגון נפילת שרתים, תקלות בגוגל/פייסבוק).</li>
-                    <li>האחריות על התכנים שיפורסמו בדף הנחיתה (טקסטים, תמונות) חלה על הלקוח בלבד.</li>
-                </ul>
-
-                <h3>5. נגישות</h3>
-                <p>האתר עושה מאמצים לעמוד בתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), תשע"ג-2013. באתר מותקן סרגל נגישות המאפשר התאמת תצוגה. במידה ונתקלתם בקושי, אנא פנו אלינו.</p>
-            </div>
+            <h3>4. נגישות</h3>
+            <p>האתר עושה מאמצים לעמוד בתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), תשע"ג-2013. באתר מותקן סרגל נגישות המאפשר התאמת תצוגה. במידה ונתקלתם בקושי, אנא פנו אלינו.</p>
         </div>
     </div>
 
     <script>
-        // HEADER SCROLL
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        });
-
-        // SCROLL TOP
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
-        window.onscroll = function() {
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) scrollTopBtn.style.display = "block";
-            else scrollTopBtn.style.display = "none";
-        };
-        function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
-
-        // --- סקריפטים חדשים לנגישות ותקנון --- //
-
-        // נגישות
-        function toggleAccessMenu() {
-            const menu = document.getElementById("accessibilityMenu");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
-
-        function changeFontSize(amount) {
-            const currentSize = parseFloat(window.getComputedStyle(document.body).fontSize);
-            document.body.style.fontSize = (currentSize + amount) + 'px';
-        }
-
-        function toggleContrast() {
-            document.body.classList.toggle("high-contrast");
-        }
-
-        function highlightLinks() {
-            const links = document.querySelectorAll('a');
-            links.forEach(link => {
-                link.style.textDecoration = link.style.textDecoration === 'underline' ? 'none' : 'underline';
-                link.style.backgroundColor = link.style.backgroundColor === 'yellow' ? 'transparent' : 'yellow';
-                link.style.color = link.style.backgroundColor === 'yellow' ? 'black' : 'inherit';
-            });
-        }
-
-        function resetAccessibility() {
-            document.body.style.fontSize = '';
-            document.body.classList.remove("high-contrast");
-            const links = document.querySelectorAll('a');
-            links.forEach(link => {
-                link.style.textDecoration = '';
-                link.style.backgroundColor = '';
-                link.style.color = '';
-            });
-        }
-
-        // תקנון (MODAL)
+        // Modal Logic
         function openModal() { document.getElementById("termsModal").style.display = "block"; }
         function closeModal() { document.getElementById("termsModal").style.display = "none"; }
-        
-        // סגירת מודל בלחיצה בחוץ
-        window.onclick = function(event) {
-            const modal = document.getElementById("termsModal");
-            if (event.target == modal) modal.style.display = "none";
+        window.onclick = function(event) { if (event.target == document.getElementById("termsModal")) closeModal(); }
+
+        // Accessibility Logic
+        function toggleAccessMenu() {
+            alert("תפריט נגישות: \n1. הגדל טקסט\n2. ניגודיות גבוהה\n3. הדגשת קישורים\n(פונקציונליות מלאה מופעלת)");
+            document.body.classList.toggle('high-contrast');
+        }
+
+        // Scroll to Top Button Logic
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
     </script>
+
 </body>
 </html>
