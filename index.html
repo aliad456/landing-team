@@ -131,10 +131,12 @@
         .popular-badge { position: absolute; top: 20px; right: -35px; background: var(--primary); padding: 5px 40px; transform: rotate(45deg); font-weight: 700; font-size: 0.9rem; }
         .price-header h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--text-light); }
         .price { font-size: 3rem; font-weight: 900; color: var(--primary); }
+        .price span { font-size: 1rem; color: var(--text-gray); font-weight: 400; } /* החזרתי את זה מהקוד שלך */
         .features-list { margin: 30px 0; text-align: right; padding: 0 10px; }
-        .features-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .features-list li i { color: var(--secondary); }
+        .features-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 1rem; }
+        .features-list li i { color: var(--secondary); font-size: 1.1rem; }
         .features-list li.disabled { color: rgba(255,255,255,0.3); text-decoration: line-through; }
+        .features-list li.disabled i { color: #475569; }
 
         /* CONTACT FORM UPDATED */
         .contact-section { background: #151F32; }
@@ -144,6 +146,7 @@
         .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: var(--primary); }
         .form-input { width: 100%; padding: 15px 20px; background: var(--dark-bg); border: 2px solid #2A3B5C; border-radius: 10px; color: var(--text-light); font-size: 1.1rem; font-family: 'Heebo'; }
         .form-input:focus { outline: none; border-color: var(--primary); }
+        textarea.form-input { resize: vertical; height: 150px; }
         .full-width { grid-column: 1 / -1; }
         
         /* תקנון וצ'קבוקס */
@@ -163,6 +166,8 @@
 
         /* FOOTER */
         footer { padding: 50px; text-align: center; background: #0a101f; border-top: 1px solid #1E293B; }
+        footer p { color: var(--text-gray); }
+        footer strong { color: var(--primary); }
         
         /* MOBILE */
         @media (max-width: 768px) {
@@ -174,7 +179,8 @@
             .form-grid { grid-template-columns: 1fr; }
             .contact-container { padding: 30px; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-            .social-sidebar { display: none; } /* במובייל בד"כ מסתירים או שמים למטה */
+            .price-card.popular { transform: none; }
+            .social-sidebar { display: none; }
         }
     </style>
 </head>
@@ -257,6 +263,13 @@
                 <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
                 <div class="portfolio-overlay"><h3>בעלי מקצוע</h3><div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div></div>
             </a>
+            <a href="https://barber.landing.team" target="_blank" class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="portfolio-overlay">
+                   <h3>מספרות וברברשופ</h3>
+                   <div class="portfolio-link">לצפייה בדמו <i class="fas fa-arrow-left"></i></div>
+                </div>
+           </a>
         </div>
     </section>
 
@@ -266,34 +279,59 @@
             <p>שקיפות מלאה. בחרו את החבילה שמתאימה לכם.</p>
         </div>
         <div class="pricing-grid">
+            
             <div class="price-card">
-                <div class="price-header"><h3>STARTER</h3><div class="price">990₪</div><div>דף נחיתה בסיסי</div></div>
+                <div class="price-header">
+                    <h3>STARTER</h3>
+                    <div class="price">990₪</div>
+                    <div style="color: #94A3B8; margin-bottom: 20px;">דף נחיתה בסיסי</div>
+                </div>
                 <ul class="features-list">
-                    <li><i class="fas fa-check-circle"></i> עיצוב רספונסיבי</li>
-                    <li><i class="fas fa-check-circle"></i> טופס לידים</li>
-                    <li class="disabled"><i class="fas fa-times-circle"></i> קופירייטינג</li>
+                    <li><i class="fas fa-check-circle"></i> עיצוב נקי ורספונסיבי</li>
+                    <li><i class="fas fa-check-circle"></i> טופס השארת פרטים</li>
+                    <li><i class="fas fa-check-circle"></i> חיבור לסאב-דומיין</li>
+                    <li><i class="fas fa-check-circle"></i> כפתורי סושיאל</li>
+                    <li class="disabled"><i class="fas fa-times-circle"></i> קופירייטינג שיווקי</li>
+                    <li class="disabled"><i class="fas fa-times-circle"></i> אוטומציות מתקדמות</li>
                 </ul>
                 <a href="#contact" class="btn btn-outline">אני רוצה את זה</a>
             </div>
+
             <div class="price-card popular">
-                <div class="popular-badge">מומלץ</div>
-                <div class="price-header"><h3>BUSINESS</h3><div class="price">₪1,890</div><div>דף ממיר + תוכן</div></div>
+                <div class="popular-badge">הכי מומלץ</div>
+                <div class="price-header">
+                    <h3>BUSINESS</h3>
+                    <div class="price">₪1,890</div>
+                    <div style="color: #94A3B8; margin-bottom: 20px;">דף נחיתה ממיר + תוכן</div>
+                </div>
                 <ul class="features-list">
-                    <li><i class="fas fa-check-circle"></i> <strong>עיצוב פרימיום</strong></li>
-                    <li><i class="fas fa-check-circle"></i> כתיבת תוכן (קופי)</li>
-                    <li><i class="fas fa-check-circle"></i> דומיין ואחסון מתנה</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>עיצוב פרימיום יוקרתי</strong></li>
+                    <li><i class="fas fa-check-circle"></i> כתיבת תוכן שיווקי (קופי)</li>
+                    <li><i class="fas fa-check-circle"></i> חיבור למייל / וואטסאפ</li>
+                    <li><i class="fas fa-check-circle"></i> אחסון לשנה מתנה</li>
+                    <li><i class="fas fa-check-circle"></i> דומיין ישראלי מתנה</li>
+                    <li><i class="fas fa-check-circle"></i> עלות הקמה מוזלת</li>
+                    <li class="disabled"><i class="fas fa-times-circle"></i> מערכת CRM מלאה</li>
                 </ul>
-                <a href="#contact" class="btn btn-primary">הבחירה המובילה</a>
+                <a href="#contact" class="btn btn-primary">הבחירה של הלקוחות</a>
             </div>
+
             <div class="price-card">
-                <div class="price-header"><h3>PRO 360</h3><div class="price">₪3,290</div><div>המעטפת המלאה</div></div>
+                <div class="price-header">
+                    <h3>PRO 360</h3>
+                    <div class="price">₪3,290</div>
+                    <div style="color: #94A3B8; margin-bottom: 20px;">המעטפת המלאה לעסקים</div>
+                </div>
                 <ul class="features-list">
-                    <li><i class="fas fa-check-circle"></i> הכל כולל הכל</li>
-                    <li><i class="fas fa-check-circle"></i> אוטומציות</li>
-                    <li><i class="fas fa-check-circle"></i> דף תודה</li>
+                    <li><i class="fas fa-check-circle"></i> כל מה שבחבילת Business</li>
+                    <li><i class="fas fa-check-circle"></i> אוטומציות (Zapier/Make)</li>
+                    <li><i class="fas fa-check-circle"></i> דף תודה מעוצב</li>
+                    <li><i class="fas fa-check-circle"></i> אופטימיזציה למהירות שיא</li>
+                    <li><i class="fas fa-check-circle"></i> חיבור לפיקסלים של פייסבוק/גוגל</li>
                 </ul>
-                <a href="#contact" class="btn btn-outline">לקחת לקצה</a>
+                <a href="#contact" class="btn btn-outline">לקחת את זה לקצה</a>
             </div>
+
         </div>
     </section>
 
