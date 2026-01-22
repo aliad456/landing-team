@@ -11,7 +11,24 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing.team | אימפריות דיגיטליות</title>
+    <title>Landing.team | בונים אימפריות דיגיטליות</title>
+    <meta name="description" content="אנחנו לא בונים סתם אתרים. אנחנו בונים מכונות שיווק שמייצרות כסף. עיצוב פרימיום, טכנולוגיה מתקדמת וחווית משתמש ברמה בינלאומית.">
+    <meta name="keywords" content="בניית אתרים, דפי נחיתה, עיצוב אתרים, Landing Page, קידום אתרים, פיתוח ווב, Landing Team, בניית דף נחיתה">
+    <meta name="author" content="Landing.team">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://landing.team/">
+    <meta property="og:title" content="Landing.team | בונים אימפריות דיגיטליות">
+    <meta property="og:description" content="הפוך את העסק למותג. דפי נחיתה ומערכות שיווק בעיצוב מקסימליסטי וטכנולוגיית AI.">
+    <meta property="og:image" content="https://landing.team/og-image.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://landing.team/">
+    <meta property="twitter:title" content="Landing.team | בונים אימפריות דיגיטליות">
+    <meta property="twitter:description" content="הפוך את העסק למותג. דפי נחיתה ומערכות שיווק בעיצוב מקסימליסטי וטכנולוגיית AI.">
+    <meta property="twitter:image" content="https://landing.team/og-image.jpg">
+
+    <meta name="theme-color" content="#030014">
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%238B5CF6%22/><stop offset=%22100%25%22 stop-color=%22%2306B6D4%22/></linearGradient></defs><path d=%22M40 10 L10 70 H30 L40 50 L50 70 H70 L40 10Z%22 fill=%22url(%23g)%22/><path d=%22M40 25 L25 55 H35 L40 45 L45 55 H55 L40 25Z%22 fill=%22%23ffffff%22/></svg>">
 
@@ -86,7 +103,7 @@
         .btn-outline { border: 2px solid var(--border); color: white; background: rgba(255,255,255,0.05); }
         .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* MARQUEE INFINITE (התיקון הגדול) */
+        /* MARQUEE INFINITE */
         .marquee-container {
             transform: rotate(-2deg); 
             background: var(--primary); 
@@ -97,7 +114,7 @@
             box-shadow: 0 10px 50px rgba(0,0,0,0.5);
             overflow: hidden; 
             display: flex;
-            width: 110%; /* קצת רחב יותר כדי למנוע חיתוך בגלל הזווית */
+            width: 110%; 
             position: relative;
             left: -5%;
         }
@@ -105,10 +122,9 @@
         .marquee-track {
             display: flex;
             white-space: nowrap;
-            /* שימוש ב-will-change מכריח את הדפדפן להשתמש בכרטיס מסך - מונע תקיעות */
             will-change: transform;
             transform: translateZ(0); 
-            animation: scroll 30s linear infinite; /* מהירות חלקה */
+            animation: scroll 30s linear infinite; 
         }
 
         .marquee-content {
